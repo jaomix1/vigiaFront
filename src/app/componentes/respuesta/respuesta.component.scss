@@ -1,0 +1,54 @@
+table {
+    width: 100%;
+  }
+
+  
+
+.yellow{
+  background-color: greenyellow;
+}
+.orange{
+  background-color: orange;
+}
+.red{
+  background-color: red;
+}
+
+
+
+.mat-column-Pregunta {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 28% !important;
+  width: 45% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+
+.mat-column-Observacion {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 28% !important;
+  width: 45% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+th.mat-header-cell {
+  text-align: center !important;
+}

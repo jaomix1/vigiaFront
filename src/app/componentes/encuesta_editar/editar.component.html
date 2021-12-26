@@ -1,0 +1,90 @@
+<div class="grid-container">
+    <mat-grid-list cols="4" rowHeight="100">
+        <mat-grid-tile class="center" [colspan]="this.tamano.col" [rowspan]="this.tamano.row">
+            <mat-card class="dashboard-card">
+                <mat-progress-bar *ngIf="this.loanding" mode="indeterminate"></mat-progress-bar>
+                <mat-card-header>
+                    <mat-card-title>
+                        <div *ngIf="detalles != null">
+                            EDITAR
+                            <h1>Respuestas de la sede: {{ detalles.Sede | uppercase }}, para el periodo: {{
+                                detalles.Periodo | uppercase }} realizada el: {{ detalles.FechaCreacion |
+                                date:'yyyy-MM-dd' }}</h1>
+                        </div>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="dashboard-card-content">
+
+                </mat-card-content>
+
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <div *ngIf="this.respuestas != null">
+        <table mat-table [dataSource]="respuestas" class="mat-elevation-z8">
+            <ng-container matColumnDef="Orden">
+                <th mat-header-cell *matHeaderCellDef>Orden</th>
+                <td mat-cell *matCellDef="let element"> {{element.Orden}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="Pregunta">
+                <th mat-header-cell *matHeaderCellDef>Pregunta</th>
+                <td mat-cell *matCellDef="let element" class="puntos">
+                    <mat-icon mat-list-icon (click)="ver(element.Pregunta)">receipt</mat-icon>
+                     {{element.Pregunta}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="Observacion">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Observacion</th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-icon mat-list-icon (click)="ver(element.Observacion)">receipt</mat-icon>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="Valor">
+                <th mat-header-cell *matHeaderCellDef>Valor</th>
+                <td mat-cell *matCellDef="let element" [ngClass]="calcularColor(element)"> {{element.Valor}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="Priorizacion">
+                <th mat-header-cell *matHeaderCellDef>Priorización</th>
+                <td mat-cell *matCellDef="let element"> {{element.Priorizacion}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="Limite">
+                <th mat-header-cell *matHeaderCellDef>Fecha Limite</th>
+                <td mat-cell *matCellDef="let element"> {{element.Limite}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="Programacion">
+                <th mat-header-cell *matHeaderCellDef>Fecha Programación</th>
+                <td mat-cell *matCellDef="let element"> {{element.Programacion}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="Delegada">
+                <th mat-header-cell *matHeaderCellDef>Linea Delegada</th>
+                <td mat-cell *matCellDef="let element"> {{element.Delegada}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="Indicador">
+                <th mat-header-cell *matHeaderCellDef>Indicador</th>
+                <td mat-cell *matCellDef="let element"> {{element.Indicador}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="Cumplimiento">
+                <th mat-header-cell *matHeaderCellDef>Cumplimiento</th>
+                <td mat-cell *matCellDef="let element"> {{element.Cumplimiento}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="Comentario">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Comentario</th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-icon mat-list-icon (click)="ver(element.Comentario)">receipt</mat-icon>
+                    </td>
+                </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>
