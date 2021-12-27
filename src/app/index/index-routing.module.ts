@@ -13,7 +13,9 @@ import { IndexComponent } from './index.component';
 
 import { RespuestaComponent } from '../componentes/respuesta/respuesta.component';
 import { HistoricoComponent } from '../componentes/historico/historico.component';
+import { GlobalComponent } from '../componentes/historico_global/global.component';
 import { EditarComponent } from '../componentes/encuesta_editar/editar.component';
+import { SedeComponent } from '../componentes/sede/sede.component';
 
 const routes: Routes = [
   {
@@ -25,8 +27,18 @@ const routes: Routes = [
           canActivate: [Acceso]
       },
       {
-          path: 'historico',
+          path: 'historicoUsuario',
           component: HistoricoComponent,
+          canActivate: [Acceso]
+      }  ,
+      {
+          path: 'historico',
+          component: GlobalComponent,
+          canActivate: [Acceso]
+      }  ,
+      {
+          path: 'sede',
+          component: SedeComponent,
           canActivate: [Acceso]
       }  ,
       {

@@ -1,19 +1,24 @@
 <div class="grid-container">
-    <mat-grid-list cols="4" rowHeight="60">
+    <mat-grid-list cols="4" rowHeight="100">
         <mat-grid-tile class="center" [colspan]="this.tamano.col" [rowspan]="this.tamano.row">
             <mat-card class="dashboard-card">
                 <mat-progress-bar *ngIf="this.loanding" mode="indeterminate"></mat-progress-bar>
                 <mat-card-header>
                     <mat-card-title>
-                        MI HISTORICO
+                        SEDES
                     </mat-card-title>
                 </mat-card-header>
                 <mat-card-content class="dashboard-card-content">
-                    <div *ngIf="this.encuestas != null">
-                        <table mat-table [dataSource]="encuestas" class="mat-elevation-z8">
-                            <ng-container matColumnDef="EncuestaId">
-                                <th mat-header-cell *matHeaderCellDef>EncuestaId</th>
-                                <td mat-cell *matCellDef="let element"> {{element.EncuestaId}}
+                    <div *ngIf="this.dataSource != null">
+                        <table mat-table [dataSource]="dataSource" #mytable class="mat-elevation-z8">
+                            <ng-container matColumnDef="EmpresaId">
+                                <th mat-header-cell *matHeaderCellDef>EmpresaId</th>
+                                <td mat-cell *matCellDef="let element"> {{element.EmpresaId}}
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Empresa">
+                                <th mat-header-cell *matHeaderCellDef>Empresa</th>
+                                <td mat-cell *matCellDef="let element"> {{element.Empresa}}
                                 </td>
                             </ng-container>
                             <ng-container matColumnDef="SedeId">
@@ -26,24 +31,14 @@
                                 <td mat-cell *matCellDef="let element"> {{element.Sede}}
                                 </td>
                             </ng-container>
-                            <ng-container matColumnDef="PeriodoId">
-                                <th mat-header-cell *matHeaderCellDef>PeriodoId</th>
-                                <td mat-cell *matCellDef="let element"> {{element.PeriodoId}}
-                                </td>
-                            </ng-container>
-                            <ng-container matColumnDef="Periodo">
-                                <th mat-header-cell *matHeaderCellDef>Periodo</th>
-                                <td mat-cell *matCellDef="let element"> {{element.Periodo}}
-                                </td>
-                            </ng-container>
-                            <ng-container matColumnDef="FechaCreacion">
-                                <th mat-header-cell *matHeaderCellDef>FechaCreacion</th>
-                                <td mat-cell *matCellDef="let element"> {{element.FechaCreacion | date:'yyyy-MM-dd'}}
+                            <ng-container matColumnDef="UsuarioId">
+                                <th mat-header-cell *matHeaderCellDef>UsuarioId</th>
+                                <td mat-cell *matCellDef="let element"> {{element.UsuarioId}}
                                 </td>
                             </ng-container>
                             <ng-container matColumnDef="Usuario">
                                 <th mat-header-cell *matHeaderCellDef>Usuario</th>
-                                <td mat-cell *matCellDef="let element"> {{element.Usuario }}
+                                <td mat-cell *matCellDef="let element"> {{element.Usuario}}
                                 </td>
                             </ng-container>
 
@@ -51,7 +46,7 @@
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
                                 <td mat-cell *matCellDef="let element">
                                   <div class="example-button-row">
-                                    <button mat-flat-button color="primary" (click)="ver(element.EncuestaId)" class="mr-2">Ver</button>
+                                    <button mat-flat-button color="primary" (click)="editar(element.SedeId)" class="mr-2">Editar</button>
                                     <!-- <button mat-flat-button color="warn" *ngIf="!element.bloqueo" (click)="bloquear(element.guid)" class="mr-2">Bloquear</button> -->
                                   </div>
                                 </td>
@@ -60,7 +55,10 @@
                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                         </table>
+                        
+                        
                     </div>
+                    <mat-paginator [pageSizeOptions]="[5, 15, 25]" showFirstLastButtons [pageSize]="25"></mat-paginator>
                 </mat-card-content>
 
             </mat-card>

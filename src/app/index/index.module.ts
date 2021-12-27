@@ -10,6 +10,8 @@ import { IndexRoutingModule } from './index-routing.module';
 import { IndexComponent } from './index.component';
 import { EncuestaModule } from '../componentes/encuesta/encuesta.module';
 import { HistoricoModule } from '../componentes/historico/historico.module';
+import { GlobalModule } from '../componentes/historico_global/global.module';
+import { SedeModule } from '../componentes/sede/sede.module';
 import { AdminModule } from '../componentes/admin/admin.module';
 
 
@@ -37,6 +39,8 @@ import { MatButtonModule } from '@angular/material/button';
 
     EncuestaModule,
     HistoricoModule,
+    GlobalModule,
+    SedeModule,
     AdminModule,
 
     

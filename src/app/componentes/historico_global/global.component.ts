@@ -11,17 +11,17 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-historico',
-  templateUrl: './historico.component.html',
-  styleUrls: ['./historico.component.scss']
+  selector: 'app-global',
+  templateUrl: './global.component.html',
+  styleUrls: ['./global.component.scss']
 })
-export class HistoricoComponent extends BaseFormComponent implements OnInit {
+export class GlobalComponent extends BaseFormComponent implements OnInit {
  
   encuestas : Encuesta2[] = null;
   
 //  displayedColumns: string[] = ['EncuestaId', 'SedeId', 'Sede', 'PeriodoId','Periodo', 'FechaCreacion', 'Usuario', 'accion'];
 
-  displayedColumns: string[] = ['Sede', 'Periodo', 'FechaCreacion','accion'];
+displayedColumns: string[] = ['Sede', 'Periodo', 'FechaCreacion','Usuario','accion'];
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -30,7 +30,7 @@ export class HistoricoComponent extends BaseFormComponent implements OnInit {
     private router: Router,
   ) {
     super();
-    this.cargarMisEncuestas();
+    this.cargarEncuestas();
   }
 
   tamano: any = { col: 1, row: 1 };
@@ -46,9 +46,9 @@ export class HistoricoComponent extends BaseFormComponent implements OnInit {
       });
   }
 
-  cargarMisEncuestas(){
+  cargarEncuestas(){
     this.loanding = true;
-    this.mys.cargarEncuestas()
+    this.mys.cargarEncuestasALL()
       .subscribe(response => {
         this.loanding = false;
         this.encuestas = response;
@@ -64,6 +64,9 @@ export class HistoricoComponent extends BaseFormComponent implements OnInit {
     window.open("/consultar/"+encuestaId, "_blank");
   }
 
+  editar(encuestaId){
+    this.router.navigate(['/index/editar', encuestaId])
+  }
    /**
   * restaura el formulario a valores iniciales
   */

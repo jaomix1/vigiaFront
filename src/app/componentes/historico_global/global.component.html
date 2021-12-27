@@ -5,7 +5,7 @@
                 <mat-progress-bar *ngIf="this.loanding" mode="indeterminate"></mat-progress-bar>
                 <mat-card-header>
                     <mat-card-title>
-                        MI HISTORICO
+                        HISTORICO
                     </mat-card-title>
                 </mat-card-header>
                 <mat-card-content class="dashboard-card-content">
@@ -52,6 +52,7 @@
                                 <td mat-cell *matCellDef="let element">
                                   <div class="example-button-row">
                                     <button mat-flat-button color="primary" (click)="ver(element.EncuestaId)" class="mr-2">Ver</button>
+                                    <button mat-flat-button color="primary" (click)="editar(element.EncuestaId)" class="mr-2">Editar</button>
                                     <!-- <button mat-flat-button color="warn" *ngIf="!element.bloqueo" (click)="bloquear(element.guid)" class="mr-2">Bloquear</button> -->
                                   </div>
                                 </td>

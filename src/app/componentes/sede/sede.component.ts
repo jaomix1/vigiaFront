@@ -5,23 +5,27 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 import { MatDialog } from '@angular/material/dialog';
 import { HttpEventType } from '@angular/common/http';
 import { SolService } from 'src/app/servicios/sol.service';
-import { MisSede } from 'src/app/modelos/sede';
+import { MisSede, Sede } from 'src/app/modelos/sede';
 import { Encuesta, Encuesta2, Pregunta, Respuesta } from 'src/app/modelos/pregunta';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-historico',
-  templateUrl: './historico.component.html',
-  styleUrls: ['./historico.component.scss']
+  selector: 'app-sede',
+  templateUrl: './sede.component.html',
+  styleUrls: ['./sede.component.scss']
 })
-export class HistoricoComponent extends BaseFormComponent implements OnInit {
+export class SedeComponent extends BaseFormComponent implements OnInit {
  
-  encuestas : Encuesta2[] = null;
+  //sedes : Sede[] = null;
+  dataSource: MatTableDataSource<Sede>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   
 //  displayedColumns: string[] = ['EncuestaId', 'SedeId', 'Sede', 'PeriodoId','Periodo', 'FechaCreacion', 'Usuario', 'accion'];
 
-  displayedColumns: string[] = ['Sede', 'Periodo', 'FechaCreacion','accion'];
+displayedColumns: string[] = ['EmpresaId', 'Empresa', 'SedeId','Sede','UsuarioId','Usuario','accion'];
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -30,7 +34,7 @@ export class HistoricoComponent extends BaseFormComponent implements OnInit {
     private router: Router,
   ) {
     super();
-    this.cargarMisEncuestas();
+    this.cargarSedes();
   }
 
   tamano: any = { col: 1, row: 1 };
@@ -39,19 +43,21 @@ export class HistoricoComponent extends BaseFormComponent implements OnInit {
       .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
-          this.tamano = { col: 4, row: 15 };
+          this.tamano = { col: 4, row: 14 };
         } else {
-          this.tamano = { col: 4, row: 11 };
+          this.tamano = { col: 4, row: 14 };
         }
       });
   }
 
-  cargarMisEncuestas(){
+  cargarSedes(){
     this.loanding = true;
-    this.mys.cargarEncuestas()
+    this.mys.Sedes()
       .subscribe(response => {
         this.loanding = false;
-        this.encuestas = response;
+        //this.sedes = response;
+        this.dataSource = new MatTableDataSource(response);
+        this.dataSource.paginator = this.paginator;
         console.log(response)
       }, error => {
         this.loanding = false;
@@ -60,10 +66,9 @@ export class HistoricoComponent extends BaseFormComponent implements OnInit {
       })
   }
 
-  ver(encuestaId){
-    window.open("/consultar/"+encuestaId, "_blank");
+  editar(SedeId){
+    
   }
-
    /**
   * restaura el formulario a valores iniciales
   */

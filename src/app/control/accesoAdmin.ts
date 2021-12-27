@@ -32,7 +32,7 @@ export class AccesoAdmin implements CanActivate {
     this.loginId = this.cookieService.get('token');  
     this.m.datos(this.loginId) 
     
-    if (this.loginId == "" || this.loginId == undefined || (this.m.datosUsuario.Rol != "Admin")) {
+    if (this.loginId == "" || this.loginId == undefined || (this.m.datosUsuario.Rol != "Administrador")) {
       const tree: UrlTree = this.router.parseUrl(this._baseUrlLogin);
       return tree;
     }

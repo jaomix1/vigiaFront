@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, retry } from 'rxjs/operators';
 import { BaseService } from '../control/baseService';
-import { MisSede } from '../modelos/sede';
+import { MisSede, Sede } from '../modelos/sede';
 import { Encuesta, Encuesta2, Pregunta, Respuesta2, Respuesta3 } from '../modelos/pregunta';
 
 @Injectable({
@@ -22,6 +22,14 @@ export class SolService extends BaseService {
   misSedes() {
     return this.http.get<MisSede[]>(
       this._baseUrl + `SOL/Sedes`
+    ).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+
+  Sedes() {
+    return this.http.get<Sede[]>(
+      this._baseUrl + `SOL/Sedes/Config`
     ).pipe(
       catchError(this.errorMgmt)
     );
@@ -76,6 +84,16 @@ export class SolService extends BaseService {
       catchError(this.errorMgmt)
     );
   }
+
+  cargarEncuestasALL() {
+    return this.http.get<Encuesta2[]>(
+      this._baseUrl + `SOL/Encuestas/ALL`
+    ).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+
+
 
 
 

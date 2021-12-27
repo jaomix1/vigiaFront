@@ -1,12 +1,13 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="false">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="true">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <mat-divider></mat-divider>
       <a mat-list-item [routerLink]="['/index/crear']" routerLinkActive="mat-list-single-selected-option">LLenar</a>
+      <a mat-list-item [routerLink]="['/index/historicoUsuario']" routerLinkActive="mat-list-single-selected-option">Mi Historico</a>
       <a mat-list-item [routerLink]="['/index/historico']" routerLinkActive="mat-list-single-selected-option">Historico</a>
-      <a mat-list-item [routerLink]="['/index/editar/24']" routerLinkActive="mat-list-single-selected-option">Editar</a>
-      <a mat-list-item [routerLink]="['/admin/users']" *ngIf="this.m.datosUsuario.Rol == 'Admin'">Usuarios</a>
+      <a mat-list-item [routerLink]="['/index/sede']" routerLinkActive="mat-list-single-selected-option">Sedes</a>
+      <a mat-list-item [routerLink]="['/admin/users']" *ngIf="this.m.datosUsuario.Rol == 'Administrador'">Usuarios</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
