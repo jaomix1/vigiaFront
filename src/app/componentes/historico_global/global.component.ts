@@ -21,7 +21,7 @@ export class GlobalComponent extends BaseFormComponent implements OnInit {
   
 //  displayedColumns: string[] = ['EncuestaId', 'SedeId', 'Sede', 'PeriodoId','Periodo', 'FechaCreacion', 'Usuario', 'accion'];
 
-displayedColumns: string[] = ['Sede', 'Periodo', 'FechaCreacion','Usuario','accion'];
+displayedColumns: string[] = ['Empresa', 'Sede', 'Periodo', 'FechaCreacion','Usuario','accion'];
 
   constructor(
     private breakpointObserver: BreakpointObserver,

@@ -21,7 +21,7 @@ export class EditarComponent extends BaseFormComponent implements OnInit {
   public respuestas : Respuesta3[] = null;
   public detalles : Encuesta2 = null;
   
-  displayedColumns: string[] = ['Orden', 'Pregunta', 'Valor', 'Observacion', 'Priorizacion', 'Limite', 'Programacion', 'Delegada', 'Indicador', 'Cumplimiento', 'Comentario'];
+  displayedColumns: string[] = ['Orden', 'Pregunta', 'Valor', 'Observacion', 'Limite', 'Programacion', 'Realizacion', 'Delegada', 'Indicador', 'Cumplimiento', 'Comentario'];
 
   constructor(
     private breakpointObserver: BreakpointObserver,

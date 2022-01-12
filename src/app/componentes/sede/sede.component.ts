@@ -23,9 +23,8 @@ export class SedeComponent extends BaseFormComponent implements OnInit {
   dataSource: MatTableDataSource<Sede>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
-//  displayedColumns: string[] = ['EncuestaId', 'SedeId', 'Sede', 'PeriodoId','Periodo', 'FechaCreacion', 'Usuario', 'accion'];
-
-displayedColumns: string[] = ['EmpresaId', 'Empresa', 'SedeId','Sede','UsuarioId','Usuario','accion'];
+//displayedColumns: string[] = ['EmpresaId', 'Empresa', 'SedeId','Sede','UsuarioId','Usuario','accion'];
+displayedColumns: string[] = ['Empresa', 'Sede','Usuario','accion'];
 
   constructor(
     private breakpointObserver: BreakpointObserver,

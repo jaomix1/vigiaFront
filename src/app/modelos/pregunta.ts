@@ -37,6 +37,8 @@
     EncuestaId : number
     SedeId : number;
     Sede : string;
+    EmpresaId : number;
+    Empresa : string;
     PeriodoId : number;
     Periodo : string;
     Usuario : string;

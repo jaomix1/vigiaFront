@@ -21,7 +21,7 @@ export class HistoricoComponent extends BaseFormComponent implements OnInit {
   
 //  displayedColumns: string[] = ['EncuestaId', 'SedeId', 'Sede', 'PeriodoId','Periodo', 'FechaCreacion', 'Usuario', 'accion'];
 
-  displayedColumns: string[] = ['Sede', 'Periodo', 'FechaCreacion','accion'];
+  displayedColumns: string[] = ['Empresa', 'Sede', 'Periodo', 'FechaCreacion','accion'];
 
   constructor(
     private breakpointObserver: BreakpointObserver,

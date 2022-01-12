@@ -9,9 +9,8 @@ export function getUrlLogin() {
   return "login";
 }
 
-//let URL = "http://190.145.26.91:8088"; //EXTE
-let URL = "http://localhost:3000"; //lOCAL
-//let URL = "http://192.168.2.251:8084"; //PRO
+let URL = "http://190.145.26.91:8091"; //EXTE
+//let URL = "http://localhost:3000"; //lOCAL
 
 export function getUrlApiSecure() {
   return URL+ "/V1/"

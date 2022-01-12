@@ -1,5 +1,5 @@
 <div class="grid-container">
-    <mat-grid-list cols="4" rowHeight="100">
+    <mat-grid-list cols="4" rowHeight="200">
         <mat-grid-tile class="center" [colspan]="this.tamano.col" [rowspan]="this.tamano.row">
             <mat-card class="dashboard-card">
                 <mat-progress-bar *ngIf="this.loanding" mode="indeterminate"></mat-progress-bar>
@@ -58,7 +58,7 @@
                         
                         
                     </div>
-                    <mat-paginator [pageSizeOptions]="[5, 15, 25]" showFirstLastButtons [pageSize]="25"></mat-paginator>
+                    <mat-paginator [pageSizeOptions]="[30, 60]" showFirstLastButtons [pageSize]="60"></mat-paginator>
                 </mat-card-content>
 
             </mat-card>

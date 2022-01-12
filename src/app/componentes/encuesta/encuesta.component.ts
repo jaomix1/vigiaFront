@@ -18,6 +18,7 @@ export class EncuestaComponent extends BaseFormComponent implements OnInit {
   esPrimeraPregunta : boolean = true;
   esUltimaPregunta : boolean = false;
   misSedes: MisSede[] = null;
+  periodo : string = "SIN PERIODO ACTIVO";
   preguntas: Pregunta[] = null;
   encuesta : Encuesta = { SedeId : 0, Respuestas : null };
   preguntaActiva: Pregunta = null;
@@ -50,8 +51,10 @@ export class EncuestaComponent extends BaseFormComponent implements OnInit {
     this.loanding = true;
     this.mys.misSedes()
       .subscribe(response => {
+        console.log(response)
         this.loanding = false;
         this.misSedes = response;
+        this.periodo = response[0].Periodo
       }, error => {
         this.loanding = false;
         this.error(error);
@@ -114,37 +117,42 @@ export class EncuestaComponent extends BaseFormComponent implements OnInit {
     this.recuperarValorPregunta(this.preguntaActiva);
   }
 
-  siguientePregunta(){    
-
-
-    this.asignarValorPregunta(this.preguntaActiva);
-
-      let index =this.preguntas.indexOf(this.preguntaActiva);
-
-      if(index == -1){      
-        this.preguntaActiva = this.preguntas[0];
+  siguientePregunta(){   
+      if(parseInt(this.varloRespuesta) != 5 && this.observacionRespuesta.length == 0)
+      {
+        this.error("Debe digitar una observacion");
       }
-      else if(index >= 0){
-        this.esPrimeraPregunta = false; 
-        if(index == (this.preguntas.length -1)){    
-          index = this.preguntas.length -2;    
-          this.esUltimaPregunta = true;
-        }
-          
-        this.preguntaActiva = this.preguntas[index + 1];
+      else{
+        this.asignarValorPregunta(this.preguntaActiva);
+
+        let index =this.preguntas.indexOf(this.preguntaActiva);
   
-      }  
-
-      if(!this.esUltimaPregunta)      
-        this.resetValorPregunta();
-
-      this.recuperarValorPregunta(this.preguntaActiva);
+        if(index == -1){      
+          this.preguntaActiva = this.preguntas[0];
+        }
+        else if(index >= 0){
+          this.esPrimeraPregunta = false; 
+          if(index == (this.preguntas.length -1)){    
+            index = this.preguntas.length -2;    
+            this.esUltimaPregunta = true;
+          }
+            
+          this.preguntaActiva = this.preguntas[index + 1];
+    
+        }  
+  
+        if(!this.esUltimaPregunta)      
+          this.resetValorPregunta();
+  
+        this.recuperarValorPregunta(this.preguntaActiva);
+      }
+      
          
   }
 
   asignarValorPregunta(data : Pregunta){
     let index = this.encuesta.Respuestas.findIndex(c=> c.Id == data.Id)
-    this.encuesta.Respuestas[index].Valor =  parseInt( this.varloRespuesta);
+    this.encuesta.Respuestas[index].Valor =  parseInt(this.varloRespuesta);
     this.encuesta.Respuestas[index].Observacion = this.observacionRespuesta;
   }
 

@@ -99,19 +99,19 @@ table {
 
     
 .yellow{
-  background-color: greenyellow;
+  background-color: rgb(192, 255, 98);
 }
 .orange{
-  background-color: orange;
+  background-color: rgb(255, 178, 36);
 }
 .red{
-  background-color: red;
+  background-color: rgb(255, 59, 59);
 }
 
 
-th.mat-header-cell {
-  text-align: center !important;
-}
+// th.mat-header-cell {
+//   text-align: center !important;
+// }
 
 .puntos{
   text-overflow: ellipsis;

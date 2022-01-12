@@ -23,7 +23,7 @@
     <div *ngIf="this.respuestas != null">
         <table mat-table [dataSource]="respuestas" class="mat-elevation-z8">
             <ng-container matColumnDef="Orden">
-                <th mat-header-cell *matHeaderCellDef>Orden</th>
+                <th mat-header-cell *matHeaderCellDef>#</th>
                 <td mat-cell *matCellDef="let element"> {{element.Orden}}
                 </td>
             </ng-container>
@@ -45,19 +45,19 @@
                 <td mat-cell *matCellDef="let element" [ngClass]="calcularColor(element)"> {{element.Valor}}
                 </td>
             </ng-container>
-            <ng-container matColumnDef="Priorizacion">
-                <th mat-header-cell *matHeaderCellDef>Priorización</th>
-                <td mat-cell *matCellDef="let element"> {{element.Priorizacion}}
-                </td>
-            </ng-container>
             <ng-container matColumnDef="Limite">
                 <th mat-header-cell *matHeaderCellDef>Fecha Limite</th>
-                <td mat-cell *matCellDef="let element"> {{element.Limite}}
+                <td mat-cell *matCellDef="let element"> {{element.Limite  | date:'yyyy/MM/dd' }}
                 </td>
             </ng-container>
             <ng-container matColumnDef="Programacion">
                 <th mat-header-cell *matHeaderCellDef>Fecha Programación</th>
-                <td mat-cell *matCellDef="let element"> {{element.Programacion}}
+                <td mat-cell *matCellDef="let element"> {{element.Programacion  | date:'yyyy/MM/dd' }}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="Realizacion">
+                <th mat-header-cell *matHeaderCellDef>Fecha Realizacion</th>
+                <td mat-cell *matCellDef="let element"> {{element.Realizacion | date:'yyyy/MM/dd' }}
                 </td>
             </ng-container>
             <ng-container matColumnDef="Delegada">
@@ -67,7 +67,7 @@
             </ng-container>
             <ng-container matColumnDef="Indicador">
                 <th mat-header-cell *matHeaderCellDef>Indicador</th>
-                <td mat-cell *matCellDef="let element"> {{element.Indicador}}
+                <td mat-cell *matCellDef="let element"> {{element.Indicador / 100 | percent:'1.1-2'}}
                 </td>
             </ng-container>
             <ng-container matColumnDef="Cumplimiento">
