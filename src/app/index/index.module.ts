@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { IndexRoutingModule } from './index-routing.module';
 import { IndexComponent } from './index.component';
 import { EncuestaModule } from '../componentes/encuesta/encuesta.module';
+import { Consulta3Module } from '../componentes/encuesta_editar_modal/consulta3.module';
 import { HistoricoModule } from '../componentes/historico/historico.module';
 import { GlobalModule } from '../componentes/historico_global/global.module';
 import { SedeModule } from '../componentes/sede/sede.module';
@@ -39,6 +40,7 @@ import { MatButtonModule } from '@angular/material/button';
 
     EncuestaModule,
     HistoricoModule,
+    Consulta3Module,
     GlobalModule,
     SedeModule,
     AdminModule,

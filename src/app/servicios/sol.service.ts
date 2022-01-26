@@ -3,7 +3,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, retry } from 'rxjs/operators';
 import { BaseService } from '../control/baseService';
 import { MisSede, Sede } from '../modelos/sede';
-import { Encuesta, Encuesta2, Pregunta, Respuesta2, Respuesta3 } from '../modelos/pregunta';
+import { Encuesta, Encuesta2, Pregunta, Respuesta2, Respuesta3, Respuesta4 } from '../modelos/pregunta';
+import { Combo } from '../modelos/combos';
 
 @Injectable({
   providedIn: 'root'
@@ -93,6 +94,72 @@ export class SolService extends BaseService {
     );
   }
 
+  cargarComboDelegados() {
+    return this.http.get<Combo[]>(
+      this._baseUrl + `SOL/Combo/Delegados`
+    ).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+
+  cargarRespuesta(encuestaId:number, respuestaId: number) {    
+    return this.http.get<Respuesta4>(
+      this._baseUrl + `SOL/Respuesta/`+encuestaId + `/` + respuestaId
+    ).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+
+  cargarSeguimiento(respuestaId: number) {    
+    return this.http.get<any>(
+      this._baseUrl + `SOL/Seguimiento/` + respuestaId
+    ).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+
+  cambiarDelegadoRespuesta(dato:any) {
+    debugger
+    return this.http.post<any>(
+      this._baseUrl + `SOL/Delegado`, dato
+    )
+      .pipe(
+        catchError(this.errorMgmt)
+      );
+  }
+
+  cambiarIndicardorRespuesta(dato:any) {
+    debugger
+    return this.http.post<any>(
+      this._baseUrl + `SOL/Indicardor`, dato
+    )
+      .pipe(
+        catchError(this.errorMgmt)
+      );
+  }
+
+  
+  cambiarCumplimientoRespuesta(dato:any) {
+    debugger
+    return this.http.post<any>(
+      this._baseUrl + `SOL/Cumplimiento`, dato
+    )
+      .pipe(
+        catchError(this.errorMgmt)
+      );
+  }
+ 
+  cambiarComentarioRespuesta(dato:any) {
+    debugger
+    return this.http.post<any>(
+      this._baseUrl + `SOL/Comentario`, dato
+    )
+      .pipe(
+        catchError(this.errorMgmt)
+      );
+  }
+
+  
 
 
 

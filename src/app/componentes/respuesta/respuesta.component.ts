@@ -22,6 +22,9 @@ export class RespuestaComponent extends BaseFormComponent implements OnInit {
   id : number =0;
   public respuestas : Respuesta2[] = null;
   public detalles : Encuesta2 = null;
+  public total : number = 170;
+  public puntaje : number = 0;
+  public puntajePorcentaje : number = 0;
 
   displayedColumns: string[] = ['Orden', 'Pregunta', 'Valor', 'Observacion'];
 
@@ -55,12 +58,19 @@ export class RespuestaComponent extends BaseFormComponent implements OnInit {
       })
   }
 
+  add(a, b) {
+      return a + b;
+  }
+
   cargarRespuestas(PeriodoSedeId){
     this.loanding = true;
     this.mys.cargarRespuestas(PeriodoSedeId)
       .subscribe(response => {
         this.loanding = false;       
         this.respuestas = response;
+        this.puntaje = this.respuestas.reduce((sum, current) => sum + current.Valor, 0)
+        this.total = this.respuestas.length * 5;
+        this.puntajePorcentaje = 100 * this.puntaje / this.total
       }, error => {
         this.loanding = false;
         this.error(error);

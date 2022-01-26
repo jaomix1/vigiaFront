@@ -9,6 +9,7 @@ import { MisSede } from 'src/app/modelos/sede';
 import { Encuesta, Encuesta2, Pregunta, Respuesta, Respuesta2, Respuesta3 } from 'src/app/modelos/pregunta';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Pag3Component } from '../encuesta_editar_modal/pag3.component';
 
 @Component({
   selector: 'app-editar',
@@ -21,7 +22,7 @@ export class EditarComponent extends BaseFormComponent implements OnInit {
   public respuestas : Respuesta3[] = null;
   public detalles : Encuesta2 = null;
   
-  displayedColumns: string[] = ['Orden', 'Pregunta', 'Valor', 'Observacion', 'Limite', 'Programacion', 'Realizacion', 'Delegada', 'Indicador', 'Cumplimiento', 'Comentario'];
+  displayedColumns: string[] = ['Orden', 'Pregunta', 'Valor', 'Observacion', 'Limite', 'Delegada', 'Realizacion', 'Indicador', 'Cumplimiento', 'Comentario', 'accion'];
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -87,6 +88,18 @@ export class EditarComponent extends BaseFormComponent implements OnInit {
         popup: 'format-pre'
       }
     })
+  }
+
+  modificar(guid: any) {
+    const dialogRef = this.dialog.open(Pag3Component, {
+      width: '800px',
+      height: '700px',
+      data: { EncuestaId : this.id, RespuestaId : guid},
+      //disableClose: true
+    });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      this.cargarEncuestaDetalles(this.id);      
+    });
   }
 
    /**

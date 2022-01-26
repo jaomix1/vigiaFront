@@ -73,7 +73,7 @@ export class EncuestaComponent extends BaseFormComponent implements OnInit {
         this.loanding = false;
         this.preguntas = response;
         this.encuesta.Respuestas =  this.preguntas.map(c => {
-          return { Id : c.Id, Valor : 1, Observacion : '' }
+          return { Id : c.Id, Valor : 5, Observacion : '' }
         } )
         this.preguntaActiva = this.preguntas[0];
       }, error => {
@@ -163,7 +163,7 @@ export class EncuestaComponent extends BaseFormComponent implements OnInit {
   }
 
   resetValorPregunta(){
-    this.varloRespuesta = "0";
+    this.varloRespuesta = "5";
     this.observacionRespuesta = ''
   }
 

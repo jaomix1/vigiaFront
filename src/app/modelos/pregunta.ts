@@ -20,16 +20,20 @@
     Orden : number;
     Pregunta : string;
   }
+  
 
   export class Respuesta3 extends Respuesta2 {
    
     Priorizacion : string;
     Limite : string;
-    Programacion : string;
     Delegada : string;
     Indicador : string;
     Cumplimiento : string;
     Comentario : string;
+  }
+  
+  export class Respuesta4 extends Respuesta3 {
+    DelegadoId : number
   }
 
 
