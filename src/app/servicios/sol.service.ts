@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, retry } from 'rxjs/operators';
 import { BaseService } from '../control/baseService';
 import { MisSede, Sede } from '../modelos/sede';
-import { Encuesta, Encuesta2, Pregunta, Respuesta2, Respuesta3, Respuesta4 } from '../modelos/pregunta';
+import { Asignada, Encuesta, Encuesta2, Pregunta, Respuesta2, Respuesta3, Respuesta4 } from '../modelos/pregunta';
 import { Combo } from '../modelos/combos';
 
 @Injectable({
@@ -102,6 +102,14 @@ export class SolService extends BaseService {
     );
   }
 
+  cargarComboEmpresas() {
+    return this.http.get<Combo[]>(
+      this._baseUrl + `SOL/Combo/Empresas`
+    ).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+
   cargarRespuesta(encuestaId:number, respuestaId: number) {    
     return this.http.get<Respuesta4>(
       this._baseUrl + `SOL/Respuesta/`+encuestaId + `/` + respuestaId
@@ -127,6 +135,17 @@ export class SolService extends BaseService {
         catchError(this.errorMgmt)
       );
   }
+
+  cambiarFechaRealizacionRespuesta(dato:any) {
+    debugger
+    return this.http.post<any>(
+      this._baseUrl + `SOL/FechaRealizacion`, dato
+    )
+      .pipe(
+        catchError(this.errorMgmt)
+      );
+  }
+  
 
   cambiarIndicardorRespuesta(dato:any) {
     debugger
@@ -157,6 +176,14 @@ export class SolService extends BaseService {
       .pipe(
         catchError(this.errorMgmt)
       );
+  }
+
+  cargarRespuestasAsignadas(EmpresaId : number, DelegadoId : number) {
+    return this.http.get<Asignada[]>(
+      this._baseUrl + `SOL/Respuestas/Asignadas/` +EmpresaId + `/`+ DelegadoId
+    ).pipe(
+      catchError(this.errorMgmt)
+    );
   }
 
   

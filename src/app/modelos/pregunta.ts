@@ -25,7 +25,7 @@
   export class Respuesta3 extends Respuesta2 {
    
     Priorizacion : string;
-    Limite : string;
+    Limite : Date;
     Delegada : string;
     Indicador : string;
     Cumplimiento : string;
@@ -33,7 +33,8 @@
   }
   
   export class Respuesta4 extends Respuesta3 {
-    DelegadoId : number
+    DelegadoId : number;
+    RealizacionTentativa : Date;
   }
 
 
@@ -46,4 +47,20 @@
     PeriodoId : number;
     Periodo : string;
     Usuario : string;
+  }
+
+
+  export class Asignada {
+    EmpresaId : number;
+    Empresa : string;
+    SedeId : number;
+    Sede : string;
+    EncuestaId : number;
+    Id : number;
+    Orden : number;
+    Pregunta : string;
+    Valor: number;
+    Observacion : string;
+    Limite : Date;
+    Realizacion : Date;
   }

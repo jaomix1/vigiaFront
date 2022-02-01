@@ -112,7 +112,6 @@ export class Pag3Component extends BaseFormComponent {
     }).then(result => {
       if (result.isConfirmed) {
         if (!result.value) throw "Debe seleccionar un delegado";
-        debugger
         let dato = { EncuestaId : this.encuestaId, RespuestaId : RespuestaId, DelegadoId : parseInt(result.value) }
         this.mys.cambiarDelegadoRespuesta(dato)
         .subscribe(response => {

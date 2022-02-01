@@ -9,6 +9,7 @@ import { IndexModule } from './index/index.module';
 import { LoginModule } from './componentes/login/login.module';
 import { RespuestaModule } from './componentes/respuesta/respuesta.module';
 import { EditarModule } from './componentes/encuesta_editar/editar.module';
+import { AsignadasModule } from './componentes/respuestas_asignadas/asignadas.module';
 
 
 import { CookieService } from 'ngx-cookie-service';
@@ -57,6 +58,7 @@ import { RespuestaComponent } from './componentes/respuesta/respuesta.component'
     RespuestaModule,
 
     EditarModule,
+    AsignadasModule,
 
     //otros globales
     SweetAlert2Module.forRoot(),

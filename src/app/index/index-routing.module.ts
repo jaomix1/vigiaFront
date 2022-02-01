@@ -16,6 +16,7 @@ import { HistoricoComponent } from '../componentes/historico/historico.component
 import { GlobalComponent } from '../componentes/historico_global/global.component';
 import { EditarComponent } from '../componentes/encuesta_editar/editar.component';
 import { SedeComponent } from '../componentes/sede/sede.component';
+import { AsignadasComponent } from '../componentes/respuestas_asignadas/asignadas.component';
 
 const routes: Routes = [
   {
@@ -40,10 +41,15 @@ const routes: Routes = [
           path: 'sede',
           component: SedeComponent,
           canActivate: [Acceso]
-      }  ,
+      },
       {
           path: 'editar/:id',
           component: EditarComponent,
+          canActivate: [Acceso]
+      },
+      {
+          path: 'asignada',
+          component: AsignadasComponent,
           canActivate: [Acceso]
       } 
     ]
