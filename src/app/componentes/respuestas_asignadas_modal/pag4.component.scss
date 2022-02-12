@@ -1,0 +1,44 @@
+.py-5{
+    padding: 20px 0px;
+}
+
+table{
+    width: 100% !important;
+}
+
+td{
+    padding-right: 24px !important;
+}
+
+.example-large-box {
+    height: 400px;
+}
+
+.row{
+    width: 98% !important;
+
+}
+
+// .mat-dialog-content {
+//     max-height: 80vh;
+//   }
+
+  .puntos{
+    text-overflow: ellipsis;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .format-pre {
+    font-size: x-small;
+  }
+
+
+  label{
+    
+  }
+
+  .line-breaker {
+    white-space: pre-line;
+  }

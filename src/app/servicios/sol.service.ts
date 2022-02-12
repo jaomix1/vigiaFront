@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, retry } from 'rxjs/operators';
 import { BaseService } from '../control/baseService';
 import { MisSede, Sede } from '../modelos/sede';
+import { Periodo } from '../modelos/periodo';
 import { Asignada, Encuesta, Encuesta2, Pregunta, Respuesta2, Respuesta3, Respuesta4 } from '../modelos/pregunta';
 import { Combo } from '../modelos/combos';
 
@@ -36,6 +37,14 @@ export class SolService extends BaseService {
     );
   }
 
+  
+  Periodos() {
+    return this.http.get<Periodo[]>(
+      this._baseUrl + `SOL/Periodos`
+    ).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
 
 
   cargarPreguntas() {
@@ -186,7 +195,14 @@ export class SolService extends BaseService {
     );
   }
 
-  
+    
+  ReportePeriodoActivo() {
+    return this.http.get<any>(
+      this._baseUrl + `SOL/Reporte/PeriodoActivo`
+    ).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
 
 
 

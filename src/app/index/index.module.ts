@@ -10,9 +10,13 @@ import { IndexRoutingModule } from './index-routing.module';
 import { IndexComponent } from './index.component';
 import { EncuestaModule } from '../componentes/encuesta/encuesta.module';
 import { Consulta3Module } from '../componentes/encuesta_editar_modal/consulta3.module';
+import { Consulta4Module } from '../componentes/respuestas_asignadas_modal/consulta4.module';
 import { HistoricoModule } from '../componentes/historico/historico.module';
 import { GlobalModule } from '../componentes/historico_global/global.module';
 import { SedeModule } from '../componentes/sede/sede.module';
+import { PeriodoModule } from '../componentes/periodo/periodo.module';
+import { ReporteModule } from '../componentes/reporte/reporte.module';
+
 import { AdminModule } from '../componentes/admin/admin.module';
 
 
@@ -41,8 +45,11 @@ import { MatButtonModule } from '@angular/material/button';
     EncuestaModule,
     HistoricoModule,
     Consulta3Module,
+    Consulta4Module,
     GlobalModule,
     SedeModule,
+    PeriodoModule,
+    ReporteModule,
     AdminModule,
 
     

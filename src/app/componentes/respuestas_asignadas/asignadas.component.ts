@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Pag3Component } from '../encuesta_editar_modal/pag3.component';
 import { Combo } from 'src/app/modelos/combos';
+import { Pag4Component } from '../respuestas_asignadas_modal/pag4.component';
 
 @Component({
   selector: 'app-asignadas',
@@ -24,7 +25,7 @@ export class AsignadasComponent extends BaseFormComponent implements OnInit {
   public delegados : Combo[] = null;
   public empresas : Combo[] = null;
   
-  displayedColumns: string[] = ['Empresa', 'Sede', 'Pregunta', 'Observacion', 'Valor', 'Limite', 'Realizacion', 'accion'];
+  displayedColumns: string[] = ['Empresa', 'Sede', 'Pregunta', 'Observacion', 'Valor', 'Limite', 'Realizacion', 'Estado', 'accion'];
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -37,7 +38,7 @@ export class AsignadasComponent extends BaseFormComponent implements OnInit {
   }
 
   submitForm = new FormGroup({
-    EmpresaId: new FormControl(null, [Validators.required]),
+    EmpresaId: new FormControl(0, []),
     DelegadoId: new FormControl(null, [Validators.required]),
   })
 
@@ -77,7 +78,7 @@ export class AsignadasComponent extends BaseFormComponent implements OnInit {
       .subscribe(response => {
         this.loanding = false;       
         this.empresas = response;
-        this.empresas.unshift({ Id : null, Descripcion : 'Seleccione una empresa'})
+        this.empresas.unshift({ Id : 0, Descripcion : 'Seleccione una empresa (opcional)'})
       }, error => {
         this.loanding = false;
         this.error(error);
@@ -100,32 +101,45 @@ export class AsignadasComponent extends BaseFormComponent implements OnInit {
 
   submit() {
     if (this.submitForm.valid) {      
+
       this.cargarAsignadas(this.submitForm.value.EmpresaId,this.submitForm.value.DelegadoId);
     }
   }
 
   modificar(encuestaId: any,  respuestaId: number) {
-    Swal.fire({
-      title: 'Finalizar',
-      text: 'desea finalizar la tarea?',
-      showCancelButton: true
-    }).then(result => {
-      if (result.isConfirmed) {        
-        let dato = { EncuestaId : encuestaId, RespuestaId : respuestaId, DelegadoId : parseInt(result.value) }
-        this.mys.cambiarFechaRealizacionRespuesta(dato)
-        .subscribe(response => {
-          this.loanding = false;
-          this.submit();
-        }, error => {
-          this.loanding = false;
-          this.error(error);
-          }, () => {
-        })
-      }
-    }).catch(err => {
-      this.loanding = false;
-      this.error(err);
+    const dialogRef = this.dialog.open(Pag4Component, {
+      width: '800px',
+      height: '700px',
+      data: { EncuestaId : encuestaId, RespuestaId : respuestaId},
+      //disableClose: true
+    });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      this.submit();     
     });
   }
+
+  // modificar(encuestaId: any,  respuestaId: number) {
+  //   Swal.fire({
+  //     title: 'Finalizar',
+  //     text: 'desea finalizar la tarea?',
+  //     showCancelButton: true
+  //   }).then(result => {
+  //     if (result.isConfirmed) {        
+  //       let dato = { EncuestaId : encuestaId, RespuestaId : respuestaId, DelegadoId : parseInt(result.value) }
+  //       this.mys.cambiarFechaRealizacionRespuesta(dato)
+  //       .subscribe(response => {
+  //         this.loanding = false;
+  //         this.submit();
+  //       }, error => {
+  //         this.loanding = false;
+  //         this.error(error);
+  //         }, () => {
+  //       })
+  //     }
+  //   }).catch(err => {
+  //     this.loanding = false;
+  //     this.error(err);
+  //   });
+  // }
 
 }
