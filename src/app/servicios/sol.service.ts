@@ -204,7 +204,13 @@ export class SolService extends BaseService {
     );
   }
 
-
+  cargarPendientesSede(SedeId : number) {
+    return this.http.get<Respuesta3[]>(
+      this._baseUrl + `SOL/Pendientes/` +SedeId
+    ).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
 
 
   ////////////////////////////////////////PQR//////////////////////////////////////////////////////////

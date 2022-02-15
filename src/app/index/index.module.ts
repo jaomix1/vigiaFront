@@ -10,6 +10,7 @@ import { IndexRoutingModule } from './index-routing.module';
 import { IndexComponent } from './index.component';
 import { EncuestaModule } from '../componentes/encuesta/encuesta.module';
 import { Consulta3Module } from '../componentes/encuesta_editar_modal/consulta3.module';
+import { PendientesSedeModule } from '../componentes/pendientes_sede/pendientesSede.module';
 import { Consulta4Module } from '../componentes/respuestas_asignadas_modal/consulta4.module';
 import { HistoricoModule } from '../componentes/historico/historico.module';
 import { GlobalModule } from '../componentes/historico_global/global.module';
@@ -51,6 +52,7 @@ import { MatButtonModule } from '@angular/material/button';
     PeriodoModule,
     ReporteModule,
     AdminModule,
+    PendientesSedeModule,
 
     
     MatSidenavModule,

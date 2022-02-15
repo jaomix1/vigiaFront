@@ -19,6 +19,7 @@ import { SedeComponent } from '../componentes/sede/sede.component';
 import { AsignadasComponent } from '../componentes/respuestas_asignadas/asignadas.component';
 import { PeriodoComponent } from '../componentes/periodo/periodo.component';
 import { ReporteComponent } from '../componentes/reporte/reporte.component';
+import { PendientesSedeComponent } from '../componentes/pendientes_sede/pendientesSede.component';
 
 const routes: Routes = [
   {
@@ -57,6 +58,11 @@ const routes: Routes = [
       {
           path: 'editar/:id',
           component: EditarComponent,
+          canActivate: [Acceso]
+      },
+      {
+          path: 'pendientes',
+          component: PendientesSedeComponent,
           canActivate: [Acceso]
       },
       {

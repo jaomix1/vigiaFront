@@ -65,7 +65,7 @@ displayedColumns: string[] = ['Periodo', 'FechaActivacion','FechaFin','FechaCier
       })
   }
 
-  editar(SedeId){
+  activarPeriodo(periodoId){
     
   }
    /**

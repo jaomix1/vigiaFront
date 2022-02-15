@@ -7,6 +7,7 @@
       <a mat-list-item [routerLink]="['/index/historicoUsuario']" routerLinkActive="mat-list-single-selected-option">Mi Historico</a>
       <a mat-list-item [routerLink]="['/index/historico']" routerLinkActive="mat-list-single-selected-option" *ngIf="this.m.datosUsuario.Rol == 'Administrador' || this.m.datosUsuario.Rol == 'Gestor'">Historico</a>
       <a mat-list-item [routerLink]="['/index/asignada']" routerLinkActive="mat-list-single-selected-option" *ngIf="this.m.datosUsuario.Rol == 'Administrador' || this.m.datosUsuario.Rol == 'Gestor'">Asignadas</a>
+      <a mat-list-item [routerLink]="['/index/pendientes']" routerLinkActive="mat-list-single-selected-option" *ngIf="this.m.datosUsuario.Rol == 'Administrador' || this.m.datosUsuario.Rol == 'Gestor'">Pendientes Sedes</a>
       <a mat-list-item [routerLink]="['/index/periodo']" routerLinkActive="mat-list-single-selected-option" *ngIf="this.m.datosUsuario.Rol == 'Administrador'">Periodos</a>
       <a mat-list-item [routerLink]="['/index/sede']" routerLinkActive="mat-list-single-selected-option" *ngIf="this.m.datosUsuario.Rol == 'Administrador'">Sedes</a>
       <a mat-list-item [routerLink]="['/index/reporte']" routerLinkActive="mat-list-single-selected-option" *ngIf="this.m.datosUsuario.Rol == 'Administrador'">Reporte</a>

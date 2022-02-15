@@ -20,14 +20,14 @@
               <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
               <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>           
-          <button mat-raised-button color="primary" [disabled]="!submitForm3.valid" *ngIf="!loanding">CONSULTAR</button>            
+          <button mat-raised-button color="primary" [disabled]="!submitForm3.valid" *ngIf="!loanding">FINALIZAR</button>            
         </form> 
         </div>
       </mat-tab>
       <mat-tab label="Comentarios">
         <div class="example-large-box">
 
-          <button *ngIf="this.respuesta.Indicador != '100'" mat-mini-fab color="primary"
+          <button mat-mini-fab color="primary"
             (click)="cambiarComentario(this.respuesta.Id)">
             <mat-icon>plus_one</mat-icon>
           </button><br>
