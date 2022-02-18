@@ -9,54 +9,97 @@
                     </mat-card-title>
                 </mat-card-header>
                 <mat-card-content class="dashboard-card-content">
-                   
-                <strong> Realizada / Total</strong>
-                   se realizaron <strong>{{EncuestaPeriodoActivo}}</strong> de  <strong>{{ TotalSedes }}</strong> encuestas
-                   <hr>
-                  <strong> sedes pendientes por llenar la encuesta:</strong>
-                   <table style="width: 40%;">
-                       <tr>
-                           <th>Empresa</th>
-                           <th>Sede</th>
-                           <th>Responsable</th>
-                       </tr>
+
+                    <strong> Realizada / Total</strong>
+                    se realizaron <strong>{{EncuestaPeriodoActivo}}</strong> de <strong>{{ TotalSedes }} </strong>
+                    encuestas <strong>{{ EncuestaPeriodoActivo / TotalSedes | percent:'1.1-2' }} </strong>
+                    <hr>
+                    <strong> sedes pendientes por llenar la encuesta:</strong>
+                    <table style="width: 90%;">
+                        <tr>
+                            <th>Empresa</th>
+                            <th>Sede</th>
+                            <th>Responsable</th>
+                        </tr>
                         <tr *ngFor="let SedePendiente of SedePendientes;">
-                           <td>{{SedePendiente.Empresa}}</td>
-                           <td>{{SedePendiente.Sede}}</td>
-                           <td>{{SedePendiente.Responsable}}</td>
-                       </tr>
-                   </table> 
-                   <hr>
-                   <strong> Consolidada de + a -:</strong>
-                   <table style="width: 40%;">
-                       <tr>
-                           <th>Empresa</th>
-                           <th>Sede</th>
-                           <th>Puntaje (Con base)</th>
-                       </tr>
+                            <td>{{SedePendiente.Empresa}}</td>
+                            <td>{{SedePendiente.Sede}}</td>
+                            <td>{{SedePendiente.Responsable}}</td>
+                        </tr>
+                    </table>
+                    <hr>
+                    <strong> Consolidada de + a -:</strong>
+                    <table style="width: 90%;">
+                        <tr>
+                            <th>Empresa</th>
+                            <th>Sede</th>
+                            <th>Puntaje (Con base)</th>
+                        </tr>
                         <tr *ngFor="let Consolidado of Consolidados;">
-                           <td>{{Consolidado.Empresa}}</td>
-                           <td>{{Consolidado.Sede}}</td>
-                           <td>{{Consolidado.PuntosTotales}}</td>
-                       </tr>
-                   </table> 
-                   <hr>
+                            <td>{{Consolidado.Empresa}}</td>
+                            <td>{{Consolidado.Sede}}</td>
+                            <td>{{Consolidado.PuntosTotales}}</td>
+                        </tr>
+                    </table>
+                    <hr>
 
-                   <strong> Top 5 sedes:</strong>
-                   <table style="width: 40%;">
-                       <tr>
-                           <th>Sede</th>
-                           <th>Puntaje</th>
-                       </tr>
-                        <tr *ngFor="let TopSede of TopSedes;">
-                           <td>{{TopSede.Sede}}</td>
-                           <td>{{TopSede.Puntos}}</td>
-                       </tr>
-                   </table> 
+                   
+                    <table>
+                        <tr>
+                            <th> <strong> Top 5 sedes:</strong></th>
+                            <th><strong> Top 5 Empresa (todos los Periodos):</strong></th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table style="width: 90%;">
+                                    <tr>
+                                        <th>Sede</th>
+                                        <th>Puntaje (Sin base)</th>
+                                    </tr>
+                                    <tr *ngFor="let TopSede of TopSedes;">
+                                        <td>{{TopSede.Sede}}</td>
+                                        <td>{{TopSede.Puntos}}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                
+                                <table style="width: 90%;">
+                                    <tr>
+                                        <th>Empresa</th>
+                                        <th>Puntaje (Sin base)</th>
+                                    </tr>
+                                    <tr *ngFor="let TopEmpresa of TopEmpresas;">
+                                        <td>{{TopEmpresa.Empresa}}</td>
+                                        <td>{{TopEmpresa.Puntos}}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
 
-                   <br>
+                    <hr>
+                    <strong>Cumplimiento Linea delegada (todos los Periodos) </strong>
+                    <table style="width: 90%;">
+                        <tr>
+                            <th>Delegado</th>
+                            <th>Cerradas</th>
+                            <th>Total Asignadas</th>
+                            <th>%</th>
+                        </tr>
+                        <tr *ngFor="let CumplimientoDelado of CumplimientoDelados;">
+                            <td>{{CumplimientoDelado.Descripcion}}</td>
+                            <td>{{CumplimientoDelado.Cantidad}}</td>
+                            <td>{{CumplimientoDelado.Total}}</td>
+                            <td>{{CumplimientoDelado.Cantidad / CumplimientoDelado.Total | percent:'1.1-2' }}</td>
+                        </tr>
+                    </table>
 
-                  
+
+
+                    <br>
+
+
                 </mat-card-content>
 
             </mat-card>

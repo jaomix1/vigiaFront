@@ -6,11 +6,11 @@
       <a mat-list-item [routerLink]="['/index/crear']" routerLinkActive="mat-list-single-selected-option">Encuesta</a>
       <a mat-list-item [routerLink]="['/index/historicoUsuario']" routerLinkActive="mat-list-single-selected-option">Mi Historico</a>
       <a mat-list-item [routerLink]="['/index/historico']" routerLinkActive="mat-list-single-selected-option" *ngIf="this.m.datosUsuario.Rol == 'Administrador' || this.m.datosUsuario.Rol == 'Gestor'">Historico</a>
-      <a mat-list-item [routerLink]="['/index/asignada']" routerLinkActive="mat-list-single-selected-option" *ngIf="this.m.datosUsuario.Rol == 'Administrador' || this.m.datosUsuario.Rol == 'Gestor'">Asignadas</a>
-      <a mat-list-item [routerLink]="['/index/pendientes']" routerLinkActive="mat-list-single-selected-option" *ngIf="this.m.datosUsuario.Rol == 'Administrador' || this.m.datosUsuario.Rol == 'Gestor'">Pendientes Sedes</a>
+      <a mat-list-item [routerLink]="['/index/asignada']" routerLinkActive="mat-list-single-selected-option" *ngIf="this.m.datosUsuario.Rol == 'Administrador' || this.m.datosUsuario.Rol == 'Gestor' || this.m.datosUsuario.Rol == 'Delegado'">Asignadas</a>
+      <a mat-list-item [routerLink]="['/index/pendientes']" routerLinkActive="mat-list-single-selected-option" *ngIf="this.m.datosUsuario.Rol == 'Administrador' || this.m.datosUsuario.Rol == 'Gestor' || this.m.datosUsuario.Rol == 'Delegado'">Pendientes Sedes</a>
       <a mat-list-item [routerLink]="['/index/periodo']" routerLinkActive="mat-list-single-selected-option" *ngIf="this.m.datosUsuario.Rol == 'Administrador'">Periodos</a>
       <a mat-list-item [routerLink]="['/index/sede']" routerLinkActive="mat-list-single-selected-option" *ngIf="this.m.datosUsuario.Rol == 'Administrador'">Sedes</a>
-      <a mat-list-item [routerLink]="['/index/reporte']" routerLinkActive="mat-list-single-selected-option" *ngIf="this.m.datosUsuario.Rol == 'Administrador'">Reporte</a>
+      <a mat-list-item [routerLink]="['/index/reporte']" routerLinkActive="mat-list-single-selected-option">Indicadores</a>
       <a mat-list-item [routerLink]="['/admin/users']" routerLinkActive="mat-list-single-selected-option" *ngIf="this.m.datosUsuario.Rol == 'Administrador'">Usuarios</a>
     </mat-nav-list>
   </mat-sidenav>

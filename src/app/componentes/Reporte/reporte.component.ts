@@ -21,6 +21,8 @@ export class ReporteComponent extends BaseFormComponent implements OnInit {
   SedePendientes : any
   Consolidados : any
   TopSedes : any
+  TopEmpresas : any
+  CumplimientoDelados : any
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -56,6 +58,8 @@ export class ReporteComponent extends BaseFormComponent implements OnInit {
         this.SedePendientes =response[2]
         this.Consolidados = response[3]
         this.TopSedes= response[4]
+        this.TopEmpresas = response[5]
+        this.CumplimientoDelados = response[6]
         console.log(response)
       }, error => {
         this.loanding = false;
