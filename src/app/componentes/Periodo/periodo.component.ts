@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { PeriodoCrearComponent } from '../periodo_crear/periodoCrear.component';
 
 @Component({
   selector: 'app-periodo',
@@ -66,13 +67,34 @@ displayedColumns: string[] = ['Periodo', 'FechaActivacion','FechaFin','FechaCier
   }
 
   activarPeriodo(periodoId){
-    
+    alert(periodoId)
+    this.loanding = true;
+    this.mys.ActivarPeriodo(periodoId)
+      .subscribe(response => {
+        this.loanding = false;
+        this.cargarPeriodos();
+      }, error => {
+        this.loanding = false;
+        this.error(error);
+      }, () => {
+      })
   }
    /**
   * restaura el formulario a valores iniciales
   */
   cancelar() {
 
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PeriodoCrearComponent, {
+      width: '600px',
+      data: { correo: '', guid: '', usuario: '', bloquedo: '', }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+        this.cargarPeriodos();
+    });
   }
 
   

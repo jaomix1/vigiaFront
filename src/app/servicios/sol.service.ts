@@ -46,6 +46,24 @@ export class SolService extends BaseService {
     );
   }
 
+  ActivarPeriodo(periodoId : number) {
+    var periodo = { PeriodoId : periodoId}
+    return this.http.post<Periodo[]>(
+      this._baseUrl + `SOL/Periodo`, periodo
+    )
+      .pipe(
+        catchError(this.errorMgmt)
+      );
+  }
+
+  CrearPeriodo(periodo : Periodo) {
+    return this.http.post<any>(
+      this._baseUrl + `SOL/Periodos/Crear`, periodo
+    )
+      .pipe(
+        catchError(this.errorMgmt)
+      );
+  }
 
   cargarPreguntas() {
     return this.http.get<Pregunta[]>(
@@ -212,6 +230,13 @@ export class SolService extends BaseService {
     );
   }
 
+  cargarPendientesGenerales() {
+    return this.http.get<Respuesta3[]>(
+      this._baseUrl + `SOL/PendientesGenerales/`
+    ).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
 
   ////////////////////////////////////////PQR//////////////////////////////////////////////////////////
 

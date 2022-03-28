@@ -3,7 +3,7 @@
 <div *ngIf="this.respuestas != null">
 
 
-    <h2><strong>Sede:</strong> {{ detalles.Sede | uppercase }} - <strong>Periodo:</strong> {{ detalles.Periodo | uppercase }} - <strong>Fecha de realizacion:</strong> {{ detalles.FechaCreacion | date:'yyyy-MM-dd' }}</h2>
+    <h2><strong>Sede:</strong> {{ detalles.Sede | uppercase }} - <strong>Periodo:</strong> {{ detalles.Periodo | uppercase }} - <strong>Fecha de realizacion:</strong> {{ detalles.FechaCreacion | date:'yyyy-MM-dd':'UTC' }}</h2>
     <h2><strong>Puntaje:</strong>{{puntaje}} de {{total}} - {{puntajePorcentaje /100 | percent:'1.1-2' }}</h2>
     <table mat-table [dataSource]="respuestas" class="mat-elevation-z8">
         <ng-container matColumnDef="Orden">

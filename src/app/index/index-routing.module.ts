@@ -20,6 +20,7 @@ import { AsignadasComponent } from '../componentes/respuestas_asignadas/asignada
 import { PeriodoComponent } from '../componentes/periodo/periodo.component';
 import { ReporteComponent } from '../componentes/reporte/reporte.component';
 import { PendientesSedeComponent } from '../componentes/pendientes_sede/pendientesSede.component';
+import { PendientesGeneralesComponent } from '../componentes/pendientes_generales/pendientesGenerales.component';
 
 const routes: Routes = [
   {
@@ -65,6 +66,13 @@ const routes: Routes = [
           component: PendientesSedeComponent,
           canActivate: [Acceso]
       },
+      {
+          path: 'pendientesGenerales',
+          component: PendientesGeneralesComponent,
+          canActivate: [Acceso]
+      },
+
+      
       {
           path: 'asignada',
           component: AsignadasComponent,

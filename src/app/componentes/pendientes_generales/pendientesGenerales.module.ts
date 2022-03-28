@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { AsignadasComponent } from './asignadas.component';
+import { PendientesGeneralesComponent } from './pendientesGenerales.component';
 
 
 import { MatCardModule } from '@angular/material/card';
@@ -24,7 +24,7 @@ import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
-    AsignadasComponent
+    PendientesGeneralesComponent
   ],
   imports: [
     CommonModule,
@@ -52,4 +52,4 @@ import { MatSortModule } from '@angular/material/sort';
   ],
 })
 
-export class AsignadasModule { }
+export class PendientesGeneralesModule { }

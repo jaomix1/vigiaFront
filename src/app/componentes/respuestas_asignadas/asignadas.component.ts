@@ -13,6 +13,10 @@ import { Pag3Component } from '../encuesta_editar_modal/pag3.component';
 import { Combo } from 'src/app/modelos/combos';
 import { Pag4Component } from '../respuestas_asignadas_modal/pag4.component';
 
+import {MatSort, Sort} from '@angular/material/sort';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+
 @Component({
   selector: 'app-asignadas',
   templateUrl: './asignadas.component.html',
@@ -21,20 +25,39 @@ import { Pag4Component } from '../respuestas_asignadas_modal/pag4.component';
 export class AsignadasComponent extends BaseFormComponent implements OnInit {
  
   id : number =0;
-  public respuestas : Asignada[] = null;
+  //public respuestas : Asignada[] = null;
   public delegados : Combo[] = null;
   public empresas : Combo[] = null;
   
   displayedColumns: string[] = ['Empresa', 'Sede', 'Pregunta', 'Observacion', 'Valor', 'Limite', 'Realizacion', 'Estado', 'accion'];
+  respuestas = new MatTableDataSource();
+
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private mys: SolService,
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private _liveAnnouncer: LiveAnnouncer
   ) {
     super();
+  }
+
+  @ViewChild(MatSort) sort: MatSort;
+
+
+  /** Announce the change in sort state for assistive technology. */
+  announceSortChange(sortState: Sort) {
+    // This example uses English messages. If your application supports
+    // multiple language, you would internationalize these strings.
+    // Furthermore, you can customize the message to add additional
+    // details about the values being sorted.
+    if (sortState.direction) {
+      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
+    } else {
+      this._liveAnnouncer.announce('Sorting cleared');
+    }
   }
 
   submitForm = new FormGroup({
@@ -91,7 +114,8 @@ export class AsignadasComponent extends BaseFormComponent implements OnInit {
     this.mys.cargarRespuestasAsignadas(EmpresaId,DelegadoId)
       .subscribe(response => {
         this.loanding = false;       
-        this.respuestas = response;
+        this.respuestas= new MatTableDataSource(response);  
+        this.respuestas.sort = this.sort; 
       }, error => {
         this.loanding = false;
         this.error(error);

@@ -27,3 +27,22 @@
   mat-sidenav-content {
     background-color: #eee;
   }
+
+  @media print {
+    h1 {
+      color: blue;
+      display: none;
+    }
+    mat-sidenav{
+      display: none;  
+      visibility: hidden;    
+    }
+    mat-card-title{
+      display: none;
+      visibility: hidden;  
+    }
+    mat-toolbar{
+      display: none;
+      visibility: hidden;  
+    }
+  }

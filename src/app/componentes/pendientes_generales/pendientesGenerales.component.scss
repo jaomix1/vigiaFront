@@ -4,27 +4,8 @@ h1{
 }
 
 table {
-  border-collapse: collapse;
   width: 100%;
 }
-
-th, td {
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even){background-color: #f2f2f2}
-
-th {
-  background-color: #3f51b5;
-  color: white;
-}
-
-
-// td {
-  
-//   vertical-align: top !important;
-// }
 
 
 .dashboard-card {
@@ -33,6 +14,11 @@ th {
   left: 1px;
   right: 4px;
   bottom: 2px;
+}
+
+
+th.mat-sort-header-sorted {
+  color: black;
 }
 
 .example-form {
@@ -111,12 +97,25 @@ th {
     width: 30px;
   }
 
-  // th.mat-header-cell {
-  //   text-align: center !important;
-  // }
+    
+.yellow{
+  background-color: rgb(192, 255, 98);
+}
+.orange{
+  background-color: rgb(255, 178, 36);
+}
+.red{
+  background-color: rgb(255, 59, 59);
+}
 
-  .example-button-row {
-    display: flex;
-  }
-  
 
+// th.mat-header-cell {
+//   text-align: center !important;
+// }
+
+.puntos{
+  text-overflow: ellipsis;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+}

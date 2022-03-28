@@ -1,3 +1,112 @@
+/* To print onto A4, landscape: 297mm X 210mm */
+$page-width: 297mm;
+$page-height: 210mm;
+$page-margin: 10mm;
+/* The number of lines in the table. (That would be the number of rows if 
+there was only one line in each row. */
+$no-of-lines: 52; 
+$heading-height: 10mm;
+/* Some correction is sometimes needed to adjust the height of lines to make 
+sure the whole table fits on the page. */
+$correction: 0.1mm; 
+
+$line-height: 
+  ($page-height - 2*$page-margin - $heading-height) 
+  / $no-of-lines 
+  - $correction;
+
+@media print {
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  @page {
+    size: $page-width $page-height;
+    margin: $page-margin;
+  }
+
+  
+  h1 {
+    /* just using the space alloted to the heading  */
+    height: $heading-height; 
+    font-size: $heading-height/2;
+    line-height: $heading-height/2;
+    padding-top: $heading-height/4; 
+    padding-bottom: $heading-height/4; 
+    margin-top:0;
+    margin-bottom:0;
+  }
+  
+  table {
+    table-layout: fixed; /* makes the text-overflow function with percentage widths on the td or th */
+    width: $page-width - 2*$page-margin;
+    border-collapse: collapse;
+    font-size: xx-small;
+  }
+
+  /* This can also be used instead of "table-layout: fixed;" above for 
+  the text-overflow to function with percentage widths on the td or th */
+  /* tr>* { 
+    max-width: 0;
+  }*/
+  
+  td, th {
+    width: 18%; /* will be changed to 10% for the first column which gives 10 + 18*5 = 100% */
+    padding: 0 1mm 0 1mm; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 1px solid black;
+    /* The distance above and below text on a line is calculated in this way:
+    (line-height - font-size)/2 so setting the line-height to the font-size 
+    value removes the space above and below the text. */
+    height: $line-height; 
+    font-size: $line-height;
+    line-height: $line-height;
+  }
+  
+  th:first-child {
+    width: 10%;
+  }
+  
+  /* if the inner content gets higher, then the td will too. 
+  (max-height on td wouldn't have any effect. */
+  td > div {
+    height: $line-height;
+  }
+  
+  /* Let us add some colors for debugging to delimitate the 
+  page area with the margins removed */
+  body {
+    position:relative;
+  }
+  
+  .background {
+    width: $page-width - 2*$page-margin;
+    height: $page-height - 2*$page-margin - 5*$correction; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(227, 237, 37, 0.5);
+  }
+
+  .Acciones{
+    display: none;
+
+  }
+
+  .table td, .table th {
+    
+}
+
+  mat-grid-list{
+    display: none;
+  }
+}
+
+
 
 h1{
   min-height: 100px;
@@ -7,6 +116,9 @@ table {
   width: 100%;
 }
 
+th.mat-sort-header-sorted {
+  color: black;
+}
 
 .dashboard-card {
   position: absolute;

@@ -43,55 +43,56 @@
     </mat-grid-list>
     
     <div *ngIf="this.respuestas != null">
-        <table mat-table [dataSource]="respuestas" class="mat-elevation-z8">
+        
+        <table mat-table [dataSource]="respuestas"  matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
             <ng-container matColumnDef="Empresa">
-                <th mat-header-cell *matHeaderCellDef>Empresa</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Empresa</th>
                 <td mat-cell *matCellDef="let element">
                     {{element.Empresa}}
                 </td>
             </ng-container>
             <ng-container matColumnDef="Sede">
-                <th mat-header-cell *matHeaderCellDef>Sede</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Sede</th>
                 <td mat-cell *matCellDef="let element">
                     {{element.Sede}}
                 </td>
             </ng-container>
             <ng-container matColumnDef="Pregunta">
-                <th mat-header-cell *matHeaderCellDef>Pregunta</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Pregunta</th>
                 <td mat-cell *matCellDef="let element">
                     {{element.Pregunta}}
                 </td>
             </ng-container>
             <ng-container matColumnDef="Observacion">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Observacion</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header>Observacion</th>
                 <td mat-cell *matCellDef="let element">
                     {{element.Observacion}}
                 </td>
             </ng-container>
             <ng-container matColumnDef="Valor">
-                <th mat-header-cell *matHeaderCellDef>Valor</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor</th>
                 <td mat-cell *matCellDef="let element" [ngClass]="calcularColor(element)"> {{element.Valor}}
                 </td>
             </ng-container>
             <ng-container matColumnDef="Limite">
-                <th mat-header-cell *matHeaderCellDef>Fecha Limite</th>
-                <td mat-cell *matCellDef="let element"> {{ element.Limite | date:'yyyy/MM/dd' }}
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Limite</th>
+                <td mat-cell *matCellDef="let element"> {{ element.Limite | date:'yyyy/MM/dd':'UTC' }}
                 </td>
             </ng-container>
             <ng-container matColumnDef="Realizacion">
-                <th mat-header-cell *matHeaderCellDef>Fecha Realizacion</th>
-                <td mat-cell *matCellDef="let element"> {{ element.Realizacion | date:'yyyy/MM/dd' }}
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha Realizacion</th>
+                <td mat-cell *matCellDef="let element"> {{ element.Realizacion | date:'yyyy/MM/dd':'UTC' }}
                 </td>
             </ng-container>
             <ng-container matColumnDef="Estado">
-                <th mat-header-cell *matHeaderCellDef>Estado</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
                 <td mat-cell *matCellDef="let element"> {{ element.Estado }}
                 </td>
             </ng-container>
 
             
             <ng-container matColumnDef="accion">
-                <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                <th mat-header-cell *matHeaderCellDef class="Acciones"> Acciones </th>
                 <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary"  *ngIf="!element.Realizacion"
                         (click)="modificar(element.EncuestaId,element.Id)">Editar</button></td>
             </ng-container>
