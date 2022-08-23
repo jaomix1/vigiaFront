@@ -11,6 +11,8 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { SedeEditarComponent } from '../sede_editar/sedeEditar.component';
+import { SedeCrearComponent } from '../sede_crear/sedeCrear.component';
 
 @Component({
   selector: 'app-sede',
@@ -24,7 +26,7 @@ export class SedeComponent extends BaseFormComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
 //displayedColumns: string[] = ['EmpresaId', 'Empresa', 'SedeId','Sede','UsuarioId','Usuario','accion'];
-displayedColumns: string[] = ['Empresa', 'Sede','Usuario','accion'];
+displayedColumns: string[] = ['Empresa', 'Sede','Usuario', 'Base','accion'];
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -65,7 +67,26 @@ displayedColumns: string[] = ['Empresa', 'Sede','Usuario','accion'];
       })
   }
 
-  editar(SedeId){
+  openDialog(): void {
+    const dialogRef = this.dialog.open(SedeCrearComponent, {
+      width: '600px',
+      data: { }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+        this.cargarSedes();
+    });
+  }
+
+  editar(SedeId, EmpresaId, Sede, UsuarioId, Base){
+    const dialogRef = this.dialog.open(SedeEditarComponent, {
+      width: '600px',
+      data: { SedeId: SedeId, EmpresaId: EmpresaId, Sede : Sede, UsuarioId :UsuarioId, Base:Base }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+        this.cargarSedes();
+    });
     
   }
    /**

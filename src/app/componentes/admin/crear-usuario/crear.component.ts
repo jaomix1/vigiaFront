@@ -20,7 +20,7 @@ export class CrearComponent extends BaseFormComponent {
     correo: new FormControl('', [Validators.required]),
     usuario: new FormControl('', [Validators.required]),
     nombreCompleto: new FormControl('', [Validators.required]),
-    perfilId: new FormControl('Comun', [Validators.required]),
+    perfilId: new FormControl('Encuestador', [Validators.required]),
     passwords: new FormGroup({
       clave: new FormControl('', [Validators.required]),
       repetirClave: new FormControl('', [Validators.required]),

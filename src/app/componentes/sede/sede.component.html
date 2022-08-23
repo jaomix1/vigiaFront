@@ -5,7 +5,12 @@
                 <mat-progress-bar *ngIf="this.loanding" mode="indeterminate"></mat-progress-bar>
                 <mat-card-header>
                     <mat-card-title>
-                        SEDES
+                        SEDES<br>
+                        <section>
+                            <button mat-mini-fab color="primary" (click)="openDialog()">
+                              <mat-icon>plus_one</mat-icon>
+                            </button>
+                          </section>
                     </mat-card-title>
                 </mat-card-header>
                 <mat-card-content class="dashboard-card-content">
@@ -41,12 +46,17 @@
                                 <td mat-cell *matCellDef="let element"> {{element.Usuario}}
                                 </td>
                             </ng-container>
+                            <ng-container matColumnDef="Base">
+                                <th mat-header-cell *matHeaderCellDef>Base</th>
+                                <td mat-cell *matCellDef="let element"> {{element.Base}}
+                                </td>
+                            </ng-container>
 
                             <ng-container matColumnDef="accion">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
                                 <td mat-cell *matCellDef="let element">
                                   <div class="example-button-row">
-                                    <button mat-flat-button color="primary" (click)="editar(element.SedeId)" class="mr-2">Editar</button>
+                                    <button mat-flat-button color="primary" (click)="editar(element.SedeId, element.EmpresaId, element.Sede, element.UsuarioId, element.Base)" class="mr-2">Editar</button>
                                     <!-- <button mat-flat-button color="warn" *ngIf="!element.bloqueo" (click)="bloquear(element.guid)" class="mr-2">Bloquear</button> -->
                                   </div>
                                 </td>

@@ -17,6 +17,7 @@ import { Consulta4Module } from '../componentes/respuestas_asignadas_modal/consu
 import { HistoricoModule } from '../componentes/historico/historico.module';
 import { GlobalModule } from '../componentes/historico_global/global.module';
 import { SedeModule } from '../componentes/sede/sede.module';
+import { SedeCrearModule } from '../componentes/sede_crear/sedeCrear.module';
 import { SedeEditarModule } from '../componentes/sede_editar/sedeEditar.module';
 import { PeriodoModule } from '../componentes/periodo/periodo.module';
 import { ReporteModule } from '../componentes/reporte/reporte.module';
@@ -52,6 +53,7 @@ import { MatButtonModule } from '@angular/material/button';
     Consulta4Module,
     GlobalModule,
     SedeModule,
+    SedeCrearModule,
     SedeEditarModule,
     PeriodoModule,
     PeriodoCrearModule,

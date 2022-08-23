@@ -4,7 +4,7 @@
 </div>
 
 <div *ngIf="!loanding">
-  <h2 mat-dialog-title style="margin-bottom: 0px;">Editar sede</h2>
+  <h2 mat-dialog-title style="margin-bottom: 0px;">Crear sede</h2>
   
   <mat-dialog-content class="mat-typography">
     <form [formGroup]="submitForm" (ngSubmit)="submit()">
@@ -46,7 +46,7 @@
         </td>         
     </tr>
       </table>
-      <button mat-raised-button color="primary" [disabled]="!submitForm.valid" *ngIf="!loanding && !loanding2">Editar</button>
+      <button mat-raised-button color="primary" [disabled]="!submitForm.valid" *ngIf="!loanding && !loanding2">Crear</button>
   </form>
   </mat-dialog-content>
   <div mat-dialog-actions>

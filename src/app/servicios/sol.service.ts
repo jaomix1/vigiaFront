@@ -37,6 +37,35 @@ export class SolService extends BaseService {
     );
   }
 
+    
+  SedeEncuestadores() {
+    return this.http.get<Sede[]>(
+      this._baseUrl + `SOL/Sedes/Encuestadores`
+    ).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+
+  
+  CrearSede(datos : Sede) {
+    return this.http.post<any>(
+      this._baseUrl + `SOL/Sedes/Crear`, datos
+    )
+      .pipe(
+        catchError(this.errorMgmt)
+      );
+  }
+  
+  Editarede(sedeId: number, datos : Sede) {
+    return this.http.post<any>(
+      this._baseUrl + `SOL/Sedes/Editar/` + sedeId, datos
+    )
+      .pipe(
+        catchError(this.errorMgmt)
+      );
+  }
+
+
   
   Periodos() {
     return this.http.get<Periodo[]>(
