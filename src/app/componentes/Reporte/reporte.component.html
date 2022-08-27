@@ -14,6 +14,9 @@
                     se realizaron <strong>{{EncuestaPeriodoActivo}}</strong> de <strong>{{ TotalSedes }} </strong>
                     encuestas <strong>{{ EncuestaPeriodoActivo / TotalSedes | percent:'1.1-2' }} </strong>
                     <hr>
+                    
+                    <button mat-raised-button color="primary" (click)="exportar()" *ngIf="!loanding">Exportar</button><br>
+                    <hr>
                     <strong> sedes pendientes por llenar la encuesta:</strong>
                     <table style="width: 90%;">
                         <tr>
@@ -43,7 +46,6 @@
                     </table>
                     <hr>
 
-                   
                     <table>
                         <tr>
                             <th> <strong> Top 5 sedes:</strong></th>

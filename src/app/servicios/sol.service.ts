@@ -267,16 +267,13 @@ export class SolService extends BaseService {
     );
   }
 
-  ////////////////////////////////////////PQR//////////////////////////////////////////////////////////
 
-  // crearPqr(dato: any) {
-  //   //dato.UsuarioId = "mercury";
-  //   return this.http.post<transaccion>(
-  //     this._baseUrl + `PQR`, dato
-  //   )
-  //     .pipe(
-  //       catchError(this.errorMgmt)
-  //     );
-  // }
+  ReporteExportarExcel() {
+    return this.http.get<any>(
+      this._baseUrl + `SOL/Reporte/Excel`
+    ).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
 
 }

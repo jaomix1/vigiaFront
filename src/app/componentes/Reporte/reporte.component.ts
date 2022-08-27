@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BaseFormComponent } from '../baseComponent';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
@@ -23,15 +23,18 @@ export class ReporteComponent extends BaseFormComponent implements OnInit {
   TopSedes : any
   TopEmpresas : any
   CumplimientoDelados : any
+  public _baseUrl: string;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private mys: SolService,
     public dialog: MatDialog,
     private router: Router,
+    @Inject('UrlApi') baseUrl: string,
   ) {
     super();
     this.cargarreportePeriodoActivo();
+    this._baseUrl = baseUrl;
   }
 
   tamano: any = { col: 1, row: 1 };
@@ -68,5 +71,8 @@ export class ReporteComponent extends BaseFormComponent implements OnInit {
       })
   }
 
+  exportar(){
+    window.open(this._baseUrl + "SOL/Reporte/Excel", "_blank");
+  }
   
 }
