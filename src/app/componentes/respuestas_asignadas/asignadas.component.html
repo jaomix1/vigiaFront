@@ -12,7 +12,7 @@
                     <form [formGroup]="submitForm" (ngSubmit)="submit()">
                         <table class="example-full-width" cellspacing="0">
                             <tr>
-                                <td>                                          
+                                <td>
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Delegado</mat-label>
                                         <mat-select formControlName="DelegadoId" matNativeControl>
@@ -34,17 +34,20 @@
                                 </td>
                             </tr>
                         </table>
-                        <button mat-raised-button color="primary" [disabled]="!submitForm.valid" *ngIf="!loanding && !loanding2">Consultar</button>
+                        <button mat-raised-button color="primary" [disabled]="!submitForm.valid"
+                            *ngIf="!loanding && !loanding2">Consultar</button>
                     </form>
                 </mat-card-content>
 
             </mat-card>
         </mat-grid-tile>
     </mat-grid-list>
-    
+
     <div *ngIf="this.respuestas != null">
-        
-        <table mat-table [dataSource]="respuestas"  matSort (matSortChange)="announceSortChange($event)" class="mat-elevation-z8">
+        <button [disabled]="!hayDatos" mat-raised-button color="primary" (click)="exportar()">Exportar</button><br>
+
+        <table mat-table [dataSource]="respuestas" matSort (matSortChange)="announceSortChange($event)"
+            class="mat-elevation-z8">
             <ng-container matColumnDef="Empresa">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Empresa</th>
                 <td mat-cell *matCellDef="let element">
@@ -71,7 +74,7 @@
             </ng-container>
             <ng-container matColumnDef="Valor">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Valor</th>
-                <td mat-cell *matCellDef="let element" [ngClass]="calcularColor(element)"> {{element.Valor}}
+                <td mat-cell *matCellDef="let element" [ngClass]="calcularColor(element)"> {{element.Valor2}}
                 </td>
             </ng-container>
             <ng-container matColumnDef="Limite">
@@ -90,11 +93,12 @@
                 </td>
             </ng-container>
 
-            
+
             <ng-container matColumnDef="accion">
                 <th mat-header-cell *matHeaderCellDef class="Acciones"> Acciones </th>
-                <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary"  *ngIf="!element.Realizacion"
-                        (click)="modificar(element.EncuestaId,element.Id)">Editar</button></td>
+                <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary"
+                        *ngIf="!element.Realizacion" (click)="modificar(element.EncuestaId,element.Id)">Editar</button>
+                </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

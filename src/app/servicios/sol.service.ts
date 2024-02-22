@@ -37,7 +37,7 @@ export class SolService extends BaseService {
     );
   }
 
-    
+
   SedeEncuestadores() {
     return this.http.get<Sede[]>(
       this._baseUrl + `SOL/Sedes/Encuestadores`
@@ -46,8 +46,8 @@ export class SolService extends BaseService {
     );
   }
 
-  
-  CrearSede(datos : Sede) {
+
+  CrearSede(datos: Sede) {
     return this.http.post<any>(
       this._baseUrl + `SOL/Sedes/Crear`, datos
     )
@@ -55,8 +55,8 @@ export class SolService extends BaseService {
         catchError(this.errorMgmt)
       );
   }
-  
-  Editarede(sedeId: number, datos : Sede) {
+
+  EditarSede(sedeId: number, datos: Sede) {
     return this.http.post<any>(
       this._baseUrl + `SOL/Sedes/Editar/` + sedeId, datos
     )
@@ -66,7 +66,7 @@ export class SolService extends BaseService {
   }
 
 
-  
+
   Periodos() {
     return this.http.get<Periodo[]>(
       this._baseUrl + `SOL/Periodos`
@@ -75,8 +75,8 @@ export class SolService extends BaseService {
     );
   }
 
-  ActivarPeriodo(periodoId : number) {
-    var periodo = { PeriodoId : periodoId}
+  ActivarPeriodo(periodoId: number) {
+    var periodo = { PeriodoId: periodoId }
     return this.http.post<Periodo[]>(
       this._baseUrl + `SOL/Periodo`, periodo
     )
@@ -85,7 +85,7 @@ export class SolService extends BaseService {
       );
   }
 
-  CrearPeriodo(periodo : Periodo) {
+  CrearPeriodo(periodo: Periodo) {
     return this.http.post<any>(
       this._baseUrl + `SOL/Periodos/Crear`, periodo
     )
@@ -102,7 +102,7 @@ export class SolService extends BaseService {
     );
   }
 
-  
+
   guardarRespuestas(dato: Encuesta) {
     return this.http.post<any>(
       this._baseUrl + `SOL/Respuestas`, dato
@@ -110,33 +110,33 @@ export class SolService extends BaseService {
       .pipe(
         catchError(this.errorMgmt)
       );
-  }  
-  cargarRespuestas(PeriodoSedeId : number) {
+  }
+  cargarRespuestas(PeriodoSedeId: number) {
     return this.http.get<Respuesta2[]>(
-      this._baseUrl + `SOL/Respuestas/` +PeriodoSedeId
+      this._baseUrl + `SOL/Respuestas/` + PeriodoSedeId
     ).pipe(
       catchError(this.errorMgmt)
     );
   }
-  cargarRespuestasDetalladas(PeriodoSedeId : number) {
+  cargarRespuestasDetalladas(PeriodoSedeId: number) {
     return this.http.get<Respuesta3[]>(
-      this._baseUrl + `SOL/Respuestas/Detalladas/` +PeriodoSedeId
+      this._baseUrl + `SOL/Respuestas/Detalladas/` + PeriodoSedeId
     ).pipe(
       catchError(this.errorMgmt)
     );
   }
 
-  cargarEncuestaDetalles(EncuestaId : number) {
+  cargarEncuestaDetalles(EncuestaId: number) {
     return this.http.get<Encuesta2>(
-      this._baseUrl + `SOL/Encuestas/` +EncuestaId
+      this._baseUrl + `SOL/Encuestas/` + EncuestaId
     ).pipe(
       catchError(this.errorMgmt)
     );
   }
 
-  cargarEncuestas() {
+  cargarEncuestas(periodoId: null | number = null) {
     return this.http.get<Encuesta2[]>(
-      this._baseUrl + `SOL/Encuestas/`
+      this._baseUrl + `SOL/EncuestasByPeriodo/` + periodoId
     ).pipe(
       catchError(this.errorMgmt)
     );
@@ -166,15 +166,40 @@ export class SolService extends BaseService {
     );
   }
 
-  cargarRespuesta(encuestaId:number, respuestaId: number) {    
-    return this.http.get<Respuesta4>(
-      this._baseUrl + `SOL/Respuesta/`+encuestaId + `/` + respuestaId
+
+  cargarComboDepartamentos() {
+    return this.http.get<Combo[]>(
+      this._baseUrl + `SOL/Combo/Departamentos`
     ).pipe(
       catchError(this.errorMgmt)
     );
   }
 
-  cargarSeguimiento(respuestaId: number) {    
+  cargarComboSedes() {
+    return this.http.get<Combo[]>(
+      this._baseUrl + `SOL/Combo/Sedes`
+    ).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+
+  cargarComboPeriodos() {
+    return this.http.get<Combo[]>(
+      this._baseUrl + `SOL/Combo/Periodos`
+    ).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+
+  cargarRespuesta(encuestaId: number, respuestaId: number) {
+    return this.http.get<Respuesta4>(
+      this._baseUrl + `SOL/Respuesta/` + encuestaId + `/` + respuestaId
+    ).pipe(
+      catchError(this.errorMgmt)
+    );
+  }
+
+  cargarSeguimiento(respuestaId: number) {
     return this.http.get<any>(
       this._baseUrl + `SOL/Seguimiento/` + respuestaId
     ).pipe(
@@ -182,8 +207,7 @@ export class SolService extends BaseService {
     );
   }
 
-  cambiarDelegadoRespuesta(dato:any) {
-    debugger
+  cambiarDelegadoRespuesta(dato: any) {
     return this.http.post<any>(
       this._baseUrl + `SOL/Delegado`, dato
     )
@@ -192,8 +216,7 @@ export class SolService extends BaseService {
       );
   }
 
-  cambiarFechaRealizacionRespuesta(dato:any) {
-    debugger
+  cambiarFechaRealizacionRespuesta(dato: any) {
     return this.http.post<any>(
       this._baseUrl + `SOL/FechaRealizacion`, dato
     )
@@ -201,10 +224,9 @@ export class SolService extends BaseService {
         catchError(this.errorMgmt)
       );
   }
-  
 
-  cambiarIndicardorRespuesta(dato:any) {
-    debugger
+
+  cambiarIndicardorRespuesta(dato: any) {
     return this.http.post<any>(
       this._baseUrl + `SOL/Indicardor`, dato
     )
@@ -213,9 +235,8 @@ export class SolService extends BaseService {
       );
   }
 
-  
-  cambiarCumplimientoRespuesta(dato:any) {
-    debugger
+
+  cambiarCumplimientoRespuesta(dato: any) {
     return this.http.post<any>(
       this._baseUrl + `SOL/Cumplimiento`, dato
     )
@@ -223,9 +244,8 @@ export class SolService extends BaseService {
         catchError(this.errorMgmt)
       );
   }
- 
-  cambiarComentarioRespuesta(dato:any) {
-    debugger
+
+  cambiarComentarioRespuesta(dato: any) {
     return this.http.post<any>(
       this._baseUrl + `SOL/Comentario`, dato
     )
@@ -234,15 +254,15 @@ export class SolService extends BaseService {
       );
   }
 
-  cargarRespuestasAsignadas(EmpresaId : number, DelegadoId : number) {
+  cargarRespuestasAsignadas(EmpresaId: number, DelegadoId: number) {
     return this.http.get<Asignada[]>(
-      this._baseUrl + `SOL/Respuestas/Asignadas/` +EmpresaId + `/`+ DelegadoId
+      this._baseUrl + `SOL/Respuestas/Asignadas/` + EmpresaId + `/` + DelegadoId
     ).pipe(
       catchError(this.errorMgmt)
     );
   }
 
-    
+
   ReportePeriodoActivo() {
     return this.http.get<any>(
       this._baseUrl + `SOL/Reporte/PeriodoActivo`
@@ -251,9 +271,9 @@ export class SolService extends BaseService {
     );
   }
 
-  cargarPendientesSede(SedeId : number) {
+  cargarPendientesSede(SedeId: number) {
     return this.http.get<Respuesta3[]>(
-      this._baseUrl + `SOL/Pendientes/` +SedeId
+      this._baseUrl + `SOL/Pendientes/` + SedeId
     ).pipe(
       catchError(this.errorMgmt)
     );

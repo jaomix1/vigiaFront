@@ -17,12 +17,12 @@ import { Pag3Component } from '../encuesta_editar_modal/pag3.component';
   styleUrls: ['./editar.component.scss']
 })
 export class EditarComponent extends BaseFormComponent implements OnInit {
- 
-  id : number =0;
-  public respuestas : Respuesta3[] = null;
-  public detalles : Encuesta2 = null;
-  
-  displayedColumns: string[] = ['Orden', 'Pregunta', 'Valor', 'Observacion', 'Limite', 'Delegada', 'Realizacion', 'Indicador', 'Cumplimiento', 'Comentario', 'accion'];
+
+  id: number = 0;
+  public respuestas: Respuesta3[] = null;
+  public detalles: Encuesta2 = null;
+
+  displayedColumns: string[] = ['Orden', 'Pregunta', 'Valor', 'Observacion', 'Limite', 'Delegada', 'Accion', 'Realizacion', 'Indicador', 'Cumplimiento', 'Comentario', 'accion'];
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -38,7 +38,7 @@ export class EditarComponent extends BaseFormComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.id = params.id;
-      this.cargarEncuestaDetalles(this.id);      
+      this.cargarEncuestaDetalles(this.id);
     });
 
     this.breakpointObserver
@@ -52,11 +52,11 @@ export class EditarComponent extends BaseFormComponent implements OnInit {
       });
   }
 
-  cargarEncuestaDetalles(periodoSedeId : number){
+  cargarEncuestaDetalles(periodoSedeId: number) {
     this.loanding = true;
     this.mys.cargarEncuestaDetalles(periodoSedeId)
       .subscribe(response => {
-        this.loanding = false;       
+        this.loanding = false;
         this.detalles = response;
         this.cargarRespuestas(periodoSedeId);
       }, error => {
@@ -66,11 +66,11 @@ export class EditarComponent extends BaseFormComponent implements OnInit {
       })
   }
 
-  cargarRespuestas(PeriodoSedeId){
+  cargarRespuestas(PeriodoSedeId) {
     this.loanding = true;
     this.mys.cargarRespuestasDetalladas(PeriodoSedeId)
       .subscribe(response => {
-        this.loanding = false;       
+        this.loanding = false;
         this.respuestas = response;
       }, error => {
         this.loanding = false;
@@ -79,8 +79,7 @@ export class EditarComponent extends BaseFormComponent implements OnInit {
       })
   }
 
-  ver(observacion : string){
-    debugger
+  ver(observacion: string) {
     Swal.fire({
       html: '<p style="font-size: small">' + observacion + '</p>',
       width: "100%",
@@ -94,20 +93,19 @@ export class EditarComponent extends BaseFormComponent implements OnInit {
     const dialogRef = this.dialog.open(Pag3Component, {
       width: '800px',
       height: '700px',
-      data: { EncuestaId : this.id, RespuestaId : guid},
+      data: { EncuestaId: this.id, RespuestaId: guid },
       //disableClose: true
     });
     dialogRef.afterClosed().subscribe((result: any) => {
-      this.cargarEncuestaDetalles(this.id);      
+      this.cargarEncuestaDetalles(this.id);
     });
   }
 
-   /**
-  * restaura el formulario a valores iniciales
-  */
+  /**
+ * restaura el formulario a valores iniciales
+ */
   cancelar() {
 
   }
 
-  
 }

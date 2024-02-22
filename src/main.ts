@@ -9,15 +9,15 @@ export function getUrlLogin() {
   return "login";
 }
 
-let URL = "http://190.145.26.91:8091"; //EXTE
-//let URL = "http://localhost:3000"; //lOCAL
+//let URL = "http://190.145.26.91:8091"; //EXTE
+let URL = "http://localhost:8091"; //lOCAL
 
 export function getUrlApiSecure() {
-  return URL+ "/V1/"
+  return URL + "/V1/"
 }
 
 export function getUrlApi() {
-  return URL+ "/V1/"
+  return URL + "/V1/"
 }
 
 export function getUrlFile() {

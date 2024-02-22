@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BaseFormComponent } from '../baseComponent';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
@@ -13,8 +13,8 @@ import { Pag3Component } from '../encuesta_editar_modal/pag3.component';
 import { Combo } from 'src/app/modelos/combos';
 import { Pag4Component } from '../respuestas_asignadas_modal/pag4.component';
 
-import {MatSort, Sort} from '@angular/material/sort';
-import {MatTable, MatTableDataSource} from '@angular/material/table';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
@@ -23,15 +23,17 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
   styleUrls: ['./asignadas.component.scss']
 })
 export class AsignadasComponent extends BaseFormComponent implements OnInit {
- 
-  id : number =0;
-  //public respuestas : Asignada[] = null;
-  public delegados : Combo[] = null;
-  public empresas : Combo[] = null;
-  
-  displayedColumns: string[] = ['Empresa', 'Sede', 'Pregunta', 'Observacion', 'Valor', 'Limite', 'Realizacion', 'Estado', 'accion'];
-  respuestas = new MatTableDataSource();
 
+  id: number = 0;
+  //public respuestas : Asignada[] = null;
+  public delegados: Combo[] = null;
+  public empresas: Combo[] = null;
+  hayDatos: boolean = false;
+
+  displayedColumns: string[] = ['Empresa', 'Sede', 'Pregunta', 'Observacion', 'Valor', 'Limite', 'Realizacion', 'Estado', 'accion'];
+  respuestas = null;// new MatTableDataSource();
+
+  public _baseUrl: string;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -39,9 +41,11 @@ export class AsignadasComponent extends BaseFormComponent implements OnInit {
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    @Inject('UrlApi') baseUrl: string,
   ) {
     super();
+    this._baseUrl = baseUrl;
   }
 
   @ViewChild(MatSort) sort: MatSort;
@@ -77,93 +81,77 @@ export class AsignadasComponent extends BaseFormComponent implements OnInit {
         }
       });
 
-      this.cargarEmpresas();
-      this.cargardelegados();
+    this.cargarEmpresas();
+    this.cargardelegados();
   }
 
-  cargardelegados(){
+  cargardelegados() {
+    this.hayDatos = false;
     this.loanding = true;
     this.mys.cargarComboDelegados()
       .subscribe(response => {
-        this.loanding = false;       
+        this.loanding = false;
         this.delegados = response;
-        this.delegados.unshift({ Id : null, Descripcion : 'Seleccione un delegado'})
+        this.delegados.unshift({ Id: null, Descripcion: 'Seleccione un delegado' })
       }, error => {
         this.loanding = false;
         this.error(error);
       }, () => {
       })
-  }  
+  }
 
-  cargarEmpresas(){
+  cargarEmpresas() {
     this.loanding = true;
     this.mys.cargarComboEmpresas()
       .subscribe(response => {
-        this.loanding = false;       
+        this.loanding = false;
         this.empresas = response;
-        this.empresas.unshift({ Id : 0, Descripcion : 'Seleccione una empresa (opcional)'})
+        this.empresas.unshift({ Id: 0, Descripcion: 'Seleccione una empresa (opcional)' })
       }, error => {
         this.loanding = false;
         this.error(error);
       }, () => {
       })
-  }  
-  
-  cargarAsignadas(EmpresaId : number, DelegadoId : number){
+  }
+
+  cargarAsignadas(EmpresaId: number, DelegadoId: number) {
     this.loanding = true;
-    this.mys.cargarRespuestasAsignadas(EmpresaId,DelegadoId)
+    this.mys.cargarRespuestasAsignadas(EmpresaId, DelegadoId)
       .subscribe(response => {
-        this.loanding = false;       
-        this.respuestas= new MatTableDataSource(response);  
-        this.respuestas.sort = this.sort; 
+        if (response.length > 0) {
+          this.hayDatos = true;
+        }
+        this.loanding = false;
+        this.respuestas = new MatTableDataSource(response);
+        this.respuestas.sort = this.sort;
       }, error => {
         this.loanding = false;
         this.error(error);
       }, () => {
       })
-  } 
+  }
 
   submit() {
-    if (this.submitForm.valid) {      
+    if (this.submitForm.valid) {
 
-      this.cargarAsignadas(this.submitForm.value.EmpresaId,this.submitForm.value.DelegadoId);
+      this.cargarAsignadas(this.submitForm.value.EmpresaId, this.submitForm.value.DelegadoId);
     }
   }
 
-  modificar(encuestaId: any,  respuestaId: number) {
+  modificar(encuestaId: any, respuestaId: number) {
     const dialogRef = this.dialog.open(Pag4Component, {
       width: '800px',
       height: '700px',
-      data: { EncuestaId : encuestaId, RespuestaId : respuestaId},
+      data: { EncuestaId: encuestaId, RespuestaId: respuestaId },
       //disableClose: true
     });
     dialogRef.afterClosed().subscribe((result: any) => {
-      this.submit();     
+      this.submit();
     });
   }
 
-  // modificar(encuestaId: any,  respuestaId: number) {
-  //   Swal.fire({
-  //     title: 'Finalizar',
-  //     text: 'desea finalizar la tarea?',
-  //     showCancelButton: true
-  //   }).then(result => {
-  //     if (result.isConfirmed) {        
-  //       let dato = { EncuestaId : encuestaId, RespuestaId : respuestaId, DelegadoId : parseInt(result.value) }
-  //       this.mys.cambiarFechaRealizacionRespuesta(dato)
-  //       .subscribe(response => {
-  //         this.loanding = false;
-  //         this.submit();
-  //       }, error => {
-  //         this.loanding = false;
-  //         this.error(error);
-  //         }, () => {
-  //       })
-  //     }
-  //   }).catch(err => {
-  //     this.loanding = false;
-  //     this.error(err);
-  //   });
-  // }
+  exportar() {
+    window.open(this._baseUrl + "SOL/Reporte/Excel2/" + this.submitForm.value.EmpresaId + "/" + this.submitForm.value.DelegadoId, "_blank");
+  }
 
 }

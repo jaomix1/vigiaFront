@@ -5,49 +5,81 @@
 
 <div *ngIf="!loanding">
   <h2 mat-dialog-title style="margin-bottom: 0px;">Editar sede</h2>
-  
+
   <mat-dialog-content class="mat-typography">
     <form [formGroup]="submitForm" (ngSubmit)="submit()">
       <table class="example-full-width" cellspacing="0">
         <tr>
-          <td>                                          
+          <td>
             <mat-form-field class="example-full-width">
               <mat-label>Empresa</mat-label>
               <mat-select formControlName="EmpresaId" matNativeControl>
-                  <mat-option *ngFor="let plan of empresas" [value]="plan.Id">
-                      {{ plan.Descripcion }}
-                  </mat-option>
-              </mat-select>
-          </mat-form-field>
-          </td>
-          <td>                                         
-            <mat-form-field class="example-full-width">
-                <mat-label>Nombre de la Sede</mat-label>
-                <input matInput maxlength="20" formControlName="Sede">
-            </mat-form-field>
-          </td>         
-      </tr>
-      <tr>
-        <td>                                          
-          <mat-form-field class="example-full-width">
-            <mat-label>Encuestador</mat-label>
-            <mat-select formControlName="UsuarioId" matNativeControl>
-                <mat-option *ngFor="let plan of encuestadores" [value]="plan.Id">
-                    {{ plan.Descripcion }}
+                <mat-option *ngFor="let plan of empresas" [value]="plan.Id">
+                  {{ plan.Descripcion }}
                 </mat-option>
-            </mat-select>
-        </mat-form-field>
-        </td>
-        <td>                                         
-          <mat-form-field class="example-full-width">
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>Nombre de la Sede</mat-label>
+              <input matInput maxlength="20" formControlName="Sede">
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>Encuestador</mat-label>
+              <mat-select formControlName="UsuarioId" matNativeControl>
+                <mat-option *ngFor="let plan of encuestadores" [value]="plan.Id">
+                  {{ plan.Descripcion }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width">
               <mat-label>valor base</mat-label>
               <input type="number" step="25" min="0" max="50" matInput maxlength="2" formControlName="Base">
-          </mat-form-field>
-        </td>         
-    </tr>
+            </mat-form-field>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>Tipo</mat-label>
+              <mat-select formControlName="Tipo" matNativeControl>
+                <mat-option *ngFor="let tipo of tipos" [value]="tipo.nombre">
+                  {{ tipo.nombre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>Codigo</mat-label>
+              <input minlength="0" maxlength="10" matInput formControlName="Codigo">
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>Departamento</mat-label>
+              <mat-select formControlName="DepartamentoId" matNativeControl>
+                <mat-option *ngFor="let plan of departamentos" [value]="plan.Id">
+                  {{ plan.Descripcion }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+        </tr>
       </table>
-      <button mat-raised-button color="primary" [disabled]="!submitForm.valid" *ngIf="!loanding && !loanding2">Editar</button>
-  </form>
+      <button mat-raised-button color="primary" [disabled]="!submitForm.valid"
+        *ngIf="!loanding && !loanding2">Editar</button>
+    </form>
   </mat-dialog-content>
   <div mat-dialog-actions>
     <button mat-flat-button color="warn" *ngIf="!this.loanding" (click)="onNoClick()">CERRAR</button>

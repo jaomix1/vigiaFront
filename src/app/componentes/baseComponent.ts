@@ -40,16 +40,16 @@ export class BaseFormComponent {
    * @param zone default value 5 colombia, cambiar si esta en la nube el servidor
    * @returns 
    */
-  fechaHoyMasDias(daysToAdd: number, zone: number = 5) {
-    const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() + daysToAdd);
-    return currentDate.toISOString().substring(0, 10) + "T0" + zone + ":00:00.000Z"; // ojo + "t para servidores colombia"
-  }
+    fechaHoyMasDias(daysToAdd: number, zone: number = 5) {
+        const currentDate = new Date();
+        currentDate.setDate(currentDate.getDate() + daysToAdd);
+        return currentDate.toISOString().substring(0, 10) + "T0" + zone + ":00:00.000Z"; // ojo + "t para servidores colombia"
+    }
 
-  diaInicialMes(){
-    var dias = new Date().getDate() -1;
-    return this.fechaHoyMasDias(-dias);
-  }
+    diaInicialMes() {
+        var dias = new Date().getDate() - 1;
+        return this.fechaHoyMasDias(-dias);
+    }
 
     error(error: string) {
         Swal.fire({
@@ -61,21 +61,23 @@ export class BaseFormComponent {
     }
 
     calcularColor(data: Respuesta2) {
-        data.Valor;
-        switch (data.Valor) {
-            case 1:
+        switch (data.Valor2) {
+            case '1':
                 return 'red'
                 break;
-            case 2:
+            case '2':
                 return 'red'
                 break;
-            case 3:
+            case '3':
                 return 'orange'
                 break;
-            case 4:
+            case '4':
                 return 'yellow'
                 break;
-            case 5:
+            case '5':
+                return 'yellow'
+                break;
+            case 'SI':
                 return 'yellow'
                 break;
             default:

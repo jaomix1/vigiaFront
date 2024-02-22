@@ -18,13 +18,13 @@ import { Combo } from 'src/app/modelos/combos';
   styleUrls: ['./periodoCrear.component.scss']
 })
 export class PeriodoCrearComponent extends BaseFormComponent {
-  
+
 
   public demo1TabIndex = 0;
-  minDate = this.fechaHoyMasDias(0,0)
+  minDate = this.fechaHoyMasDias(0, 0)
 
   submitForm = new FormGroup({
-    Periodo: new FormControl('', [Validators.required]),
+    Periodo: new FormControl(this.fechaHoyMasDias(0, 5).toString().substring(0, 7), [Validators.required]),
     FechaActivacion: new FormControl(this.fechaHoyMasDias(0, 5), [Validators.required]),
     FechaFin: new FormControl(this.fechaHoyMasDias(0, 5), [Validators.required]),
     FechaCierre: new FormControl(this.fechaHoyMasDias(0, 5), [Validators.required]),
@@ -38,14 +38,14 @@ export class PeriodoCrearComponent extends BaseFormComponent {
     this.loanding = false;
   }
 
-  
+
   submit() {
     if (this.submitForm.valid) {
       this.loanding = true;
       this.mys.CrearPeriodo(this.submitForm.value)
         .subscribe(response => {
-            this.loanding = false;
-            this.dialogRef.close(response);
+          this.loanding = false;
+          this.dialogRef.close(response);
         }, error => {
           this.loanding = false;
           this.error(error);
@@ -54,4 +54,8 @@ export class PeriodoCrearComponent extends BaseFormComponent {
     }
   }
 
+  onNoClick(): void {
+    this.submitForm.reset();
+    this.dialogRef.close();
+  }
 }

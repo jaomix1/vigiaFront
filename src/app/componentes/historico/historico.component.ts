@@ -9,6 +9,7 @@ import { MisSede } from 'src/app/modelos/sede';
 import { Encuesta, Encuesta2, Pregunta, Respuesta } from 'src/app/modelos/pregunta';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { Combo } from 'src/app/modelos/combos';
 
 @Component({
   selector: 'app-historico',
@@ -16,12 +17,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./historico.component.scss']
 })
 export class HistoricoComponent extends BaseFormComponent implements OnInit {
- 
-  encuestas : Encuesta2[] = null;
-  
-//  displayedColumns: string[] = ['EncuestaId', 'SedeId', 'Sede', 'PeriodoId','Periodo', 'FechaCreacion', 'Usuario', 'accion'];
+  periodos: Combo[] = null;
+  encuestas: Encuesta2[] = null;
 
-  displayedColumns: string[] = ['Empresa', 'Sede', 'Periodo', 'FechaCreacion','accion'];
+  //  displayedColumns: string[] = ['EncuestaId', 'SedeId', 'Sede', 'PeriodoId','Periodo', 'FechaCreacion', 'Usuario', 'accion'];
+
+  displayedColumns: string[] = ['Empresa', 'Sede', 'Periodo', 'FechaCreacion', 'accion'];
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -30,8 +31,11 @@ export class HistoricoComponent extends BaseFormComponent implements OnInit {
     private router: Router,
   ) {
     super();
-    this.cargarMisEncuestas();
   }
+
+  submitForm = new FormGroup({
+    PeriodoId: new FormControl(0, []),
+  })
 
   tamano: any = { col: 1, row: 1 };
   ngOnInit(): void {
@@ -39,16 +43,35 @@ export class HistoricoComponent extends BaseFormComponent implements OnInit {
       .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
-          this.tamano = { col: 4, row: 15 };
+          this.tamano = { col: 4, row: 1 };
         } else {
-          this.tamano = { col: 4, row: 11 };
+          this.tamano = { col: 4, row: 1 };
         }
       });
+
+
+    this.cargarPeriodos();
   }
 
-  cargarMisEncuestas(){
+  cargarPeriodos() {
     this.loanding = true;
-    this.mys.cargarEncuestas()
+    this.mys.cargarComboPeriodos()
+      .subscribe(response => {
+        this.loanding = false;
+        this.periodos = response;
+        this.periodos.unshift({ Id: 0, Descripcion: 'TODOS' })
+
+        this.cargarMisEncuestas(0);
+      }, error => {
+        this.loanding = false;
+        this.error(error);
+      }, () => {
+      })
+  }
+
+  cargarMisEncuestas(periodoId: number | null = null) {
+    this.loanding = true;
+    this.mys.cargarEncuestas(periodoId)
       .subscribe(response => {
         this.loanding = false;
         this.encuestas = response;
@@ -60,16 +83,23 @@ export class HistoricoComponent extends BaseFormComponent implements OnInit {
       })
   }
 
-  ver(encuestaId){
-    window.open("/consultar/"+encuestaId, "_blank");
+  ver(encuestaId) {
+    window.open("/consultar/" + encuestaId, "_blank");
   }
 
-   /**
-  * restaura el formulario a valores iniciales
-  */
+  /**
+ * restaura el formulario a valores iniciales
+ */
   cancelar() {
 
   }
 
-  
+  submit() {
+    if (this.submitForm.valid) {
+
+      this.cargarMisEncuestas(this.submitForm.value.PeriodoId);
+    }
+  }
+
+
 }

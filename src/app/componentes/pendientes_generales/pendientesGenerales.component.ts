@@ -12,8 +12,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Pag3Component } from '../encuesta_editar_modal/pag3.component';
 import { Combo } from 'src/app/modelos/combos';
 
-import {MatSort, Sort} from '@angular/material/sort';
-import {MatTable, MatTableDataSource} from '@angular/material/table';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
@@ -22,11 +22,11 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
   styleUrls: ['./pendientesGenerales.component.scss']
 })
 export class PendientesGeneralesComponent extends BaseFormComponent implements OnInit {
- 
-  id : number =0;
+
+  id: number = 0;
   //public respuestas : Respuesta3[] = null;
-  public sedes : Combo[] = null;
-  
+  public sedes: Combo[] = null;
+
   displayedColumns: string[] = ['Periodo', 'Sede', 'Orden', 'Pregunta', 'Valor', 'Observacion', 'Limite', 'Delegada', 'Realizacion', 'Indicador', 'Cumplimiento', 'Comentario'];
   dataSource = new MatTableDataSource();
 
@@ -68,16 +68,16 @@ export class PendientesGeneralesComponent extends BaseFormComponent implements O
           this.tamano = { col: 4, row: 1 };
         }
       });
-      this.cargarRespuestas();
+    this.cargarRespuestas();
   }
 
-  cargarRespuestas(){
+  cargarRespuestas() {
     this.loanding = true;
     this.mys.cargarPendientesGenerales()
       .subscribe(response => {
-        this.loanding = false;         
-        this.dataSource = new MatTableDataSource(response);  
-        this.dataSource.sort = this.sort; 
+        this.loanding = false;
+        this.dataSource = new MatTableDataSource(response);
+        this.dataSource.sort = this.sort;
       }, error => {
         this.loanding = false;
         this.error(error);
@@ -85,8 +85,7 @@ export class PendientesGeneralesComponent extends BaseFormComponent implements O
       })
   }
 
-  ver(observacion : string){
-    debugger
+  ver(observacion: string) {
     Swal.fire({
       html: '<p style="font-size: small">' + observacion + '</p>',
       width: "100%",
@@ -96,23 +95,23 @@ export class PendientesGeneralesComponent extends BaseFormComponent implements O
     })
   }
 
-  cargarSedes(){
+  cargarSedes() {
     this.loanding = true;
     this.mys.Sedes()
       .subscribe(response => {
-        this.loanding = false;       
-        this.sedes = response.map(c=> <Combo> { Id : c.SedeId, Descripcion : c.Sede});
-        this.sedes.unshift({ Id : null, Descripcion : 'Seleccione una sede'})
+        this.loanding = false;
+        this.sedes = response.map(c => <Combo>{ Id: c.SedeId, Descripcion: c.Sede });
+        this.sedes.unshift({ Id: null, Descripcion: 'Seleccione una sede' })
       }, error => {
         this.loanding = false;
         this.error(error);
       }, () => {
       })
-  }  
+  }
 
   cancelar() {
 
   }
 
-  
+
 }

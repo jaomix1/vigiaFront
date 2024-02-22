@@ -19,12 +19,12 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class RespuestaComponent extends BaseFormComponent implements OnInit {
 
-  id : number =0;
-  public respuestas : Respuesta2[] = null;
-  public detalles : Encuesta2 = null;
-  public total : number = 170;
-  public puntaje : number = 0;
-  public puntajePorcentaje : number = 0;
+  id: number = 0;
+  public respuestas: Respuesta2[] = null;
+  public detalles: Encuesta2 = null;
+  public total: number = 170;
+  public puntaje: number = 0;
+  public puntajePorcentaje: number = 0;
 
   displayedColumns: string[] = ['Orden', 'Pregunta', 'Valor', 'Observacion'];
 
@@ -40,15 +40,15 @@ export class RespuestaComponent extends BaseFormComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.id = params.id;
-      this.cargarEncuestaDetalles(this.id);      
+      this.cargarEncuestaDetalles(this.id);
     });
   }
 
-  cargarEncuestaDetalles(periodoSedeId : number){
+  cargarEncuestaDetalles(periodoSedeId: number) {
     this.loanding = true;
     this.mys.cargarEncuestaDetalles(periodoSedeId)
       .subscribe(response => {
-        this.loanding = false;       
+        this.loanding = false;
         this.detalles = response;
         this.cargarRespuestas(periodoSedeId);
       }, error => {
@@ -59,14 +59,14 @@ export class RespuestaComponent extends BaseFormComponent implements OnInit {
   }
 
   add(a, b) {
-      return a + b;
+    return a + b;
   }
 
-  cargarRespuestas(PeriodoSedeId){
+  cargarRespuestas(PeriodoSedeId) {
     this.loanding = true;
     this.mys.cargarRespuestas(PeriodoSedeId)
       .subscribe(response => {
-        this.loanding = false;       
+        this.loanding = false;
         this.respuestas = response;
         this.puntaje = this.respuestas.reduce((sum, current) => sum + current.Valor, 0)
         this.total = this.respuestas.length * 5;
@@ -79,11 +79,10 @@ export class RespuestaComponent extends BaseFormComponent implements OnInit {
   }
 
 
-   /**
-  * restaura el formulario a valores iniciales
-  */
+  /**
+ * restaura el formulario a valores iniciales
+ */
   cancelar() {
     this.router.navigate(['/index/crear'])
   }
-
 }

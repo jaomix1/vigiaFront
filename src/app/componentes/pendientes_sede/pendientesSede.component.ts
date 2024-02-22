@@ -18,11 +18,11 @@ import { Combo } from 'src/app/modelos/combos';
   styleUrls: ['./pendientesSede.component.scss']
 })
 export class PendientesSedeComponent extends BaseFormComponent implements OnInit {
- 
-  id : number =0;
-  public respuestas : Respuesta3[] = null;
-  public sedes : Combo[] = null;
-  
+
+  id: number = 0;
+  public respuestas: Respuesta3[] = null;
+  public sedes: Combo[] = null;
+
   displayedColumns: string[] = ['Periodo', 'Orden', 'Pregunta', 'Valor', 'Observacion', 'Limite', 'Delegada', 'Realizacion', 'Indicador', 'Cumplimiento', 'Comentario'];
 
   constructor(
@@ -47,15 +47,15 @@ export class PendientesSedeComponent extends BaseFormComponent implements OnInit
         }
       });
 
-      
+
     this.cargarSedes();
   }
 
-  cargarRespuestas(sedeId){
+  cargarRespuestas(sedeId) {
     this.loanding = true;
     this.mys.cargarPendientesSede(sedeId)
       .subscribe(response => {
-        this.loanding = false;       
+        this.loanding = false;
         this.respuestas = response;
       }, error => {
         this.loanding = false;
@@ -64,8 +64,7 @@ export class PendientesSedeComponent extends BaseFormComponent implements OnInit
       })
   }
 
-  ver(observacion : string){
-    debugger
+  ver(observacion: string) {
     Swal.fire({
       html: '<p style="font-size: small">' + observacion + '</p>',
       width: "100%",
@@ -75,27 +74,27 @@ export class PendientesSedeComponent extends BaseFormComponent implements OnInit
     })
   }
 
-  cargarSedes(){
+  cargarSedes() {
     this.loanding = true;
-    this.mys.Sedes()
+    this.mys.cargarComboSedes()
       .subscribe(response => {
-        this.loanding = false;       
-        this.sedes = response.map(c=> <Combo> { Id : c.SedeId, Descripcion : c.Sede});
-        this.sedes.unshift({ Id : null, Descripcion : 'Seleccione una sede'})
+        this.loanding = false;
+        this.sedes = response;
+        this.sedes.unshift({ Id: null, Descripcion: 'Seleccione una sede' })
       }, error => {
         this.loanding = false;
         this.error(error);
       }, () => {
       })
-  }  
+  }
 
-  
+
   submitForm = new FormGroup({
     SedeId: new FormControl(null, [Validators.required]),
   })
 
   submit() {
-    if (this.submitForm.valid) { 
+    if (this.submitForm.valid) {
       this.cargarRespuestas(this.submitForm.value.SedeId);
     }
   }
@@ -113,12 +112,12 @@ export class PendientesSedeComponent extends BaseFormComponent implements OnInit
   //   });
   // }
 
-   /**
-  * restaura el formulario a valores iniciales
-  */
+  /**
+ * restaura el formulario a valores iniciales
+ */
   cancelar() {
 
   }
 
-  
+
 }

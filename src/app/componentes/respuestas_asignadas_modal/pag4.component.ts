@@ -23,9 +23,9 @@ export class Pag4Component extends BaseFormComponent {
   public respuestaId: number;
   public respuesta: Respuesta4;
   public delegados: [string, string][] = []
-  public seguimientos : any;
+  public seguimientos: any;
   maxDate = this.fechaHoyMasDias(0)
-  
+
   displayedColumns: string[] = ['Tipo', 'Detalle', 'NombreCompleto', 'Fecha'];
 
   public demo1TabIndex = 0;
@@ -35,19 +35,19 @@ export class Pag4Component extends BaseFormComponent {
     inicio: new FormControl(this.fechaHoyMasDias(0), [Validators.required])
   })
 
-  submit(){
+  submit() {
     if (this.submitForm3.valid) {
-    let dato = { EncuestaId :this.encuestaId, RespuestaId :  this.respuestaId, Fecha : this.submitForm3.value.inicio  }
-        this.mys.cambiarFechaRealizacionRespuesta(dato)
+      let dato = { EncuestaId: this.encuestaId, RespuestaId: this.respuestaId, Fecha: this.submitForm3.value.inicio }
+      this.mys.cambiarFechaRealizacionRespuesta(dato)
         .subscribe(response => {
           this.loanding = false;
           this.cargarRespuesta(this.encuestaId, this.respuestaId);
         }, error => {
           this.loanding = false;
           this.error(error);
-          }, () => {
+        }, () => {
         })
-      }
+    }
   }
 
   constructor(
@@ -65,26 +65,24 @@ export class Pag4Component extends BaseFormComponent {
   cargarRespuesta(encuestaId: number, respuestaId: number) {
     this.loanding = true;
     this.mys.cargarRespuesta(encuestaId, respuestaId).subscribe(req => {
-      
+
       this.respuesta = req;
       this.loanding = false;
     }, error => {
-      debugger
       this.loanding = false;
       this.error(error);
-    }, () => {  
-        this.obtenertSeguimiento(respuestaId);
+    }, () => {
+      this.obtenertSeguimiento(respuestaId);
     })
   }
 
-  obtenertSeguimiento(respuestaId){
-    
+  obtenertSeguimiento(respuestaId) {
+
     this.mys.cargarSeguimiento(respuestaId).subscribe(req => {
-      
+
       this.seguimientos = req;
       this.loanding = false;
     }, error => {
-      debugger
       this.loanding = false;
       this.error(error);
     }, () => {
@@ -95,28 +93,27 @@ export class Pag4Component extends BaseFormComponent {
     this.dialogRef.close();
   }
 
-  
-  cambiarComentario(RespuestaId){
+
+  cambiarComentario(RespuestaId) {
     Swal.fire({
       title: 'Cambio de Comentario',
       input: 'textarea',
       inputPlaceholder: 'Ingrese un Comentario',
-      inputAttributes: {  maxlength: "500" },
+      inputAttributes: { maxlength: "500" },
       showCancelButton: true
     }).then(result => {
       if (result.isConfirmed) {
         if (!result.value) throw "Debe Ingresar un Comentario";
-        debugger
-        let dato = { EncuestaId : this.encuestaId, RespuestaId : RespuestaId, Comentario : result.value }
+        let dato = { EncuestaId: this.encuestaId, RespuestaId: RespuestaId, Comentario: result.value }
         this.mys.cambiarComentarioRespuesta(dato)
-        .subscribe(response => {
-          this.loanding = false;
-          this.cargarRespuesta(this.encuestaId, this.respuestaId);
-        }, error => {
-          this.loanding = false;
-          this.error(error);
+          .subscribe(response => {
+            this.loanding = false;
+            this.cargarRespuesta(this.encuestaId, this.respuestaId);
+          }, error => {
+            this.loanding = false;
+            this.error(error);
           }, () => {
-        })
+          })
 
       }
     }).catch(err => {
@@ -126,5 +123,5 @@ export class Pag4Component extends BaseFormComponent {
 
 
   }
-  
+
 }

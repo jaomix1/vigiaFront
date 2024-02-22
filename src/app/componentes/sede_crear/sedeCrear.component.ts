@@ -11,17 +11,22 @@ import { SolService } from 'src/app/servicios/sol.service';
   styleUrls: ['./sedeCrear.component.scss']
 })
 export class SedeCrearComponent extends BaseFormComponent {
-  empresas : any = [];
-  encuestadores : any = [];
+  empresas: any = [];
+  encuestadores: any = [];
+  departamentos: any = [];
+  tipos: any = [{ id: 1, nombre: "EMPRESA GRANDE" }, { id: 2, nombre: "EMPRESA MEDIANA" }, { id: 3, nombre: "EMPRESA PEQUEÑA" }, { id: 5, nombre: "EMPRESA TERCERA" }, { id: 4, nombre: "DISPENSARIO" }];
 
   public demo1TabIndex = 0;
-  minDate = this.fechaHoyMasDias(0,0)
+  minDate = this.fechaHoyMasDias(0, 0)
 
   submitForm = new FormGroup({
     EmpresaId: new FormControl('', [Validators.required]),
     Sede: new FormControl('', [Validators.required]),
     UsuarioId: new FormControl('', [Validators.required]),
     Base: new FormControl(0, [Validators.required]),
+    Tipo: new FormControl(0, [Validators.required]),
+    Codigo: new FormControl(0, [Validators.required]),
+    DepartamentoId: new FormControl('', [Validators.required]),
   })
 
   constructor(
@@ -32,16 +37,17 @@ export class SedeCrearComponent extends BaseFormComponent {
     this.loanding = false;
     this.cargarEmpresas();
     this.cargarSedeEncuestadores();
+    this.cargarDepartamentos();
   }
 
-  
+
   submit() {
     if (this.submitForm.valid) {
       this.loanding = true;
       this.mys.CrearSede(this.submitForm.value)
         .subscribe(response => {
-            this.loanding = false;
-            this.dialogRef.close(response);
+          this.loanding = false;
+          this.dialogRef.close(response);
         }, error => {
           this.loanding = false;
           this.error(error);
@@ -50,31 +56,51 @@ export class SedeCrearComponent extends BaseFormComponent {
     }
   }
 
-  cargarEmpresas(){
+  cargarEmpresas() {
     this.loanding = true;
     this.mys.cargarComboEmpresas()
       .subscribe(response => {
-        this.loanding = false;       
+        this.loanding = false;
         this.empresas = response;
       }, error => {
         this.loanding = false;
         this.error(error);
       }, () => {
       })
-  } 
+  }
 
 
-  cargarSedeEncuestadores(){
+  cargarSedeEncuestadores() {
     this.loanding = true;
     this.mys.SedeEncuestadores()
       .subscribe(response => {
-        this.loanding = false;       
+        this.loanding = false;
         this.encuestadores = response;
       }, error => {
         this.loanding = false;
         this.error(error);
       }, () => {
       })
-  } 
+  }
+
+  cargarDepartamentos() {
+    this.loanding = true;
+    this.mys.cargarComboDepartamentos()
+      .subscribe(response => {
+        this.loanding = false;
+        this.departamentos = response;
+      }, error => {
+        this.loanding = false;
+        this.error(error);
+      }, () => {
+      })
+  }
+
+
+  onNoClick(): void {
+    this.submitForm.reset();
+    this.dialogRef.close();
+  }
+
 
 }

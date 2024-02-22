@@ -20,13 +20,13 @@ import { SedeCrearComponent } from '../sede_crear/sedeCrear.component';
   styleUrls: ['./sede.component.scss']
 })
 export class SedeComponent extends BaseFormComponent implements OnInit {
- 
+
   //sedes : Sede[] = null;
   dataSource: MatTableDataSource<Sede>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  
-//displayedColumns: string[] = ['EmpresaId', 'Empresa', 'SedeId','Sede','UsuarioId','Usuario','accion'];
-displayedColumns: string[] = ['Empresa', 'Sede','Usuario', 'Base','accion'];
+
+  //displayedColumns: string[] = ['EmpresaId', 'Empresa', 'SedeId','Sede','UsuarioId','Usuario','accion'];
+  displayedColumns: string[] = ['Empresa', 'Sede', 'Codigo', 'Tipo', 'Departamento', 'Usuario', 'Base', 'accion'];
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -51,7 +51,7 @@ displayedColumns: string[] = ['Empresa', 'Sede','Usuario', 'Base','accion'];
       });
   }
 
-  cargarSedes(){
+  cargarSedes() {
     this.loanding = true;
     this.mys.Sedes()
       .subscribe(response => {
@@ -70,31 +70,31 @@ displayedColumns: string[] = ['Empresa', 'Sede','Usuario', 'Base','accion'];
   openDialog(): void {
     const dialogRef = this.dialog.open(SedeCrearComponent, {
       width: '600px',
-      data: { }
+      data: {}
     });
 
     dialogRef.afterClosed().subscribe(() => {
-        this.cargarSedes();
+      this.cargarSedes();
     });
   }
 
-  editar(SedeId, EmpresaId, Sede, UsuarioId, Base){
+  editar(SedeId, EmpresaId, Sede, UsuarioId, Base, Tipo, Codigo, DepartamentoId) {
     const dialogRef = this.dialog.open(SedeEditarComponent, {
       width: '600px',
-      data: { SedeId: SedeId, EmpresaId: EmpresaId, Sede : Sede, UsuarioId :UsuarioId, Base:Base }
+      data: { SedeId: SedeId, EmpresaId: EmpresaId, Sede: Sede, UsuarioId: UsuarioId, Base: Base, Tipo: Tipo, Codigo: Codigo, DepartamentoId: DepartamentoId }
     });
 
     dialogRef.afterClosed().subscribe(() => {
-        this.cargarSedes();
+      this.cargarSedes();
     });
-    
+
   }
-   /**
-  * restaura el formulario a valores iniciales
-  */
+  /**
+ * restaura el formulario a valores iniciales
+ */
   cancelar() {
 
   }
 
-  
+
 }
