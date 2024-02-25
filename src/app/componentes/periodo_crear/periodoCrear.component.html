@@ -3,52 +3,38 @@
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 
-
-{{loanding}}
 <div *ngIf="!loanding">
   <h2 mat-dialog-title style="margin-bottom: 0px;">Crear periodo</h2>
-  
+
   <mat-dialog-content class="mat-typography">
     <form [formGroup]="submitForm" (ngSubmit)="submit()">
       <table class="example-full-width" cellspacing="0">
         <tr>
-          <td>                                         
+          <td>
             <mat-form-field class="example-full-width">
-                <mat-label>Nombre del periodo</mat-label>
-                <input matInput maxlength="20" formControlName="Periodo">
+              <mat-label>Nombre del periodo</mat-label>
+              <input title="Nombre del periodo" placeholder="Nombre del periodo" matInput maxlength="20"
+                formControlName="Periodo">
             </mat-form-field>
           </td>
-          <td>                                          
-              <mat-form-field class="example-full-width">
-                  <mat-label>Fecha Activacion</mat-label>
-                  <input matInput [matDatepicker]="picker1" [min]="minDate" formControlName="FechaActivacion">
-                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                  <mat-datepicker #picker1></mat-datepicker>
-              </mat-form-field>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>Departamento</mat-label>
+              <mat-select formControlName="Departamentos" matNativeControl multiple>
+                <mat-option *ngFor="let plan of departamentos" [value]="plan.Id">
+                  {{ plan.Descripcion }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </td>
-         
-      </tr>
-          <tr>
-              <td>                                          
-                  <mat-form-field class="example-full-width">
-                      <mat-label>Fecha Cierre</mat-label>
-                      <input matInput [matDatepicker]="picker2" [min]="minDate" formControlName="FechaCierre">
-                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                      <mat-datepicker #picker2></mat-datepicker>
-                  </mat-form-field>
-              </td>
-              <td>                                         
-                <mat-form-field class="example-full-width">
-                    <mat-label>Fecha Fin</mat-label>
-                    <input matInput [matDatepicker]="picker3" [min]="minDate" formControlName="FechaFin">
-                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                    <mat-datepicker #picker3></mat-datepicker>
-                </mat-form-field>
-              </td>
-          </tr>
+        </tr>
       </table>
-      <button mat-raised-button color="primary" [disabled]="!submitForm.valid" *ngIf="!loanding && !loanding2">Crear</button>
-  </form>
+      {{ submitForm.value | json }}
+      <button mat-raised-button color="primary" [disabled]="!submitForm.valid"
+        *ngIf="!loanding && !loanding2">Crear</button>
+    </form>
   </mat-dialog-content>
   <div mat-dialog-actions>
     <button mat-flat-button color="warn" *ngIf="!this.loanding" (click)="onNoClick()">CERRAR</button>

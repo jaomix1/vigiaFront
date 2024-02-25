@@ -49,9 +49,8 @@ export class EncuestaComponent extends BaseFormComponent implements OnInit {
 
   cargarMisSedes() {
     this.loanding = true;
-    this.mys.misSedes()
+    this.mys.misSedesAencuestar()
       .subscribe(response => {
-        console.log(response)
         this.loanding = false;
         this.misSedes = response;
         this.periodo = response[0].Periodo

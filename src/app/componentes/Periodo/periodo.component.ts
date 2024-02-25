@@ -19,13 +19,13 @@ import { PeriodoCrearComponent } from '../periodo_crear/periodoCrear.component';
   styleUrls: ['./periodo.component.scss']
 })
 export class PeriodoComponent extends BaseFormComponent implements OnInit {
- 
+
   //sedes : Sede[] = null;
   dataSource: MatTableDataSource<Periodo>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  
-//displayedColumns: string[] = ['EmpresaId', 'Empresa', 'SedeId','Sede','UsuarioId','Usuario','accion'];
-displayedColumns: string[] = ['Periodo', 'FechaActivacion','FechaFin','FechaCierre', 'Estado', 'accion'];
+
+  //displayedColumns: string[] = ['EmpresaId', 'Empresa', 'SedeId','Sede','UsuarioId','Usuario','accion'];
+  displayedColumns: string[] = ['Periodo', 'FechaActivacion', 'FechaFin', 'FechaCierre', 'Estado', 'accion'];
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -50,15 +50,13 @@ displayedColumns: string[] = ['Periodo', 'FechaActivacion','FechaFin','FechaCier
       });
   }
 
-  cargarPeriodos(){
+  cargarPeriodos() {
     this.loanding = true;
     this.mys.Periodos()
       .subscribe(response => {
         this.loanding = false;
-        //this.sedes = response;
         this.dataSource = new MatTableDataSource(response);
         this.dataSource.paginator = this.paginator;
-        console.log(response)
       }, error => {
         this.loanding = false;
         this.error(error);
@@ -66,7 +64,7 @@ displayedColumns: string[] = ['Periodo', 'FechaActivacion','FechaFin','FechaCier
       })
   }
 
-  activarPeriodo(periodoId){
+  activarPeriodo(periodoId) {
     alert(periodoId)
     this.loanding = true;
     this.mys.ActivarPeriodo(periodoId)
@@ -79,9 +77,9 @@ displayedColumns: string[] = ['Periodo', 'FechaActivacion','FechaFin','FechaCier
       }, () => {
       })
   }
-   /**
-  * restaura el formulario a valores iniciales
-  */
+  /**
+ * restaura el formulario a valores iniciales
+ */
   cancelar() {
 
   }
@@ -93,9 +91,9 @@ displayedColumns: string[] = ['Periodo', 'FechaActivacion','FechaFin','FechaCier
     });
 
     dialogRef.afterClosed().subscribe(() => {
-        this.cargarPeriodos();
+      this.cargarPeriodos();
     });
   }
 
-  
+
 }

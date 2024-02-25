@@ -14,23 +14,22 @@ import jwt_decode from "jwt-decode";
     providedIn: 'root'
 })
 export class MenuService extends BaseService {
-    public datosUsuario : any = { Nombre : "", Perfil : "", Usuario : "", Mail:"", Rol :""};
-    public titulo : string = "";
+    public datosUsuario: any = { Nombre: "", Perfil: "", Usuario: "", Mail: "", Rol: "" };
+    public titulo: string = "";
     constructor(
         @Inject('UrlApi') baseUrl: string,
-        private http: HttpClient,   
+        private http: HttpClient,
     ) {
         super(baseUrl);
-    }  
+    }
 
-    datos(token: string) : any {        
-        let dato : any = jwt_decode(token); 
+    datos(token: string): any {
+        let dato: any = jwt_decode(token);
         this.datosUsuario.Nombre = dato.user.Nombre
         this.datosUsuario.Mail = dato.user.Mail
         this.datosUsuario.Rol = dato.user.PerfilId
         this.datosUsuario.Perfil = dato.user.Perfil
         this.datosUsuario.Usuario = dato.user.Nombre
-        //console.log(dato)
     }
-    
+
 }

@@ -75,7 +75,6 @@ export class HistoricoComponent extends BaseFormComponent implements OnInit {
       .subscribe(response => {
         this.loanding = false;
         this.encuestas = response;
-        console.log(response)
       }, error => {
         this.loanding = false;
         this.error(error);

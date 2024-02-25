@@ -16,12 +16,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./global.component.scss']
 })
 export class GlobalComponent extends BaseFormComponent implements OnInit {
- 
-  encuestas : Encuesta2[] = null;
-  
-//  displayedColumns: string[] = ['EncuestaId', 'SedeId', 'Sede', 'PeriodoId','Periodo', 'FechaCreacion', 'Usuario', 'accion'];
 
-displayedColumns: string[] = ['Empresa', 'Sede', 'Periodo', 'FechaCreacion','Usuario','accion'];
+  encuestas: Encuesta2[] = null;
+
+  //  displayedColumns: string[] = ['EncuestaId', 'SedeId', 'Sede', 'PeriodoId','Periodo', 'FechaCreacion', 'Usuario', 'accion'];
+
+  displayedColumns: string[] = ['Empresa', 'Sede', 'Periodo', 'FechaCreacion', 'Usuario', 'accion'];
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -46,13 +46,12 @@ displayedColumns: string[] = ['Empresa', 'Sede', 'Periodo', 'FechaCreacion','Usu
       });
   }
 
-  cargarEncuestas(){
+  cargarEncuestas() {
     this.loanding = true;
     this.mys.cargarEncuestasALL()
       .subscribe(response => {
         this.loanding = false;
         this.encuestas = response;
-        console.log(response)
       }, error => {
         this.loanding = false;
         this.error(error);
@@ -60,19 +59,19 @@ displayedColumns: string[] = ['Empresa', 'Sede', 'Periodo', 'FechaCreacion','Usu
       })
   }
 
-  ver(encuestaId){
-    window.open("/consultar/"+encuestaId, "_blank");
+  ver(encuestaId) {
+    window.open("/consultar/" + encuestaId, "_blank");
   }
 
-  editar(encuestaId){
+  editar(encuestaId) {
     this.router.navigate(['/index/editar', encuestaId])
   }
-   /**
-  * restaura el formulario a valores iniciales
-  */
+  /**
+ * restaura el formulario a valores iniciales
+ */
   cancelar() {
 
   }
 
-  
+
 }

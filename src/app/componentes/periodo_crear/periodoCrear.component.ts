@@ -4,7 +4,7 @@ import { BaseFormComponent } from '../baseComponent';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import Swal from 'sweetalert2';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpEventType } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { SolService } from 'src/app/servicios/sol.service';
@@ -19,15 +19,14 @@ import { Combo } from 'src/app/modelos/combos';
 })
 export class PeriodoCrearComponent extends BaseFormComponent {
 
-
+  private control: FormArray;
   public demo1TabIndex = 0;
-  minDate = this.fechaHoyMasDias(0, 0)
+  minDate = this.fechaHoyMasDias(0, 0);
+  departamentos: any = [];
 
   submitForm = new FormGroup({
     Periodo: new FormControl(this.fechaHoyMasDias(0, 5).toString().substring(0, 7), [Validators.required]),
-    FechaActivacion: new FormControl(this.fechaHoyMasDias(0, 5), [Validators.required]),
-    FechaFin: new FormControl(this.fechaHoyMasDias(0, 5), [Validators.required]),
-    FechaCierre: new FormControl(this.fechaHoyMasDias(0, 5), [Validators.required]),
+    Departamentos: new FormControl('', [Validators.required]),
   })
 
   constructor(
@@ -35,9 +34,23 @@ export class PeriodoCrearComponent extends BaseFormComponent {
     public dialogRef: MatDialogRef<PeriodoCrearComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     super();
+
     this.loanding = false;
+    this.cargarDepartamentos();
   }
 
+  cargarDepartamentos() {
+    this.loanding = true;
+    this.mys.cargarComboDepartamentos()
+      .subscribe(response => {
+        this.loanding = false;
+        this.departamentos = response;
+      }, error => {
+        this.loanding = false;
+        this.error(error);
+      }, () => {
+      })
+  }
 
   submit() {
     if (this.submitForm.valid) {

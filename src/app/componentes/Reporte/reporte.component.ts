@@ -14,15 +14,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./reporte.component.scss']
 })
 export class ReporteComponent extends BaseFormComponent implements OnInit {
- 
-  data : any = null;
-  TotalSedes : any;
-  EncuestaPeriodoActivo : any
-  SedePendientes : any
-  Consolidados : any
-  TopSedes : any
-  TopEmpresas : any
-  CumplimientoDelados : any
+
+  data: any = null;
+  TotalSedes: any;
+  EncuestaPeriodoActivo: any
+  SedePendientes: any
+  Consolidados: any
+  TopSedes: any
+  TopEmpresas: any
+  CumplimientoDelados: any
   public _baseUrl: string;
 
   constructor(
@@ -50,7 +50,7 @@ export class ReporteComponent extends BaseFormComponent implements OnInit {
       });
   }
 
-  cargarreportePeriodoActivo(){
+  cargarreportePeriodoActivo() {
     this.loanding = true;
     this.mys.ReportePeriodoActivo()
       .subscribe(response => {
@@ -58,12 +58,11 @@ export class ReporteComponent extends BaseFormComponent implements OnInit {
         this.data = response;
         this.TotalSedes = response[0][0].TotalSedes
         this.EncuestaPeriodoActivo = response[1][0].EncuestaPeriodoActivo
-        this.SedePendientes =response[2]
+        this.SedePendientes = response[2]
         this.Consolidados = response[3]
-        this.TopSedes= response[4]
+        this.TopSedes = response[4]
         this.TopEmpresas = response[5]
         this.CumplimientoDelados = response[6]
-        console.log(response)
       }, error => {
         this.loanding = false;
         this.error(error);
@@ -71,8 +70,8 @@ export class ReporteComponent extends BaseFormComponent implements OnInit {
       })
   }
 
-  exportar(){
+  exportar() {
     window.open(this._baseUrl + "SOL/Reporte/Excel", "_blank");
   }
-  
+
 }

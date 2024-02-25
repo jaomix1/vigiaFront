@@ -21,7 +21,7 @@ export class SolService extends BaseService {
   }
 
   ////////////////////////////////////////Combos//////////////////////////////////////////////////////////
-  misSedes() {
+  misSedesAencuestar() {
     return this.http.get<MisSede[]>(
       this._baseUrl + `SOL/Sedes`
     ).pipe(

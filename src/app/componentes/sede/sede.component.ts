@@ -59,7 +59,6 @@ export class SedeComponent extends BaseFormComponent implements OnInit {
         //this.sedes = response;
         this.dataSource = new MatTableDataSource(response);
         this.dataSource.paginator = this.paginator;
-        console.log(response)
       }, error => {
         this.loanding = false;
         this.error(error);

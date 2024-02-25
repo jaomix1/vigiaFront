@@ -13,14 +13,14 @@ import { MenuService } from 'src/app/servicios/menu.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent extends BaseFormComponent implements OnInit  {
+export class LoginComponent extends BaseFormComponent implements OnInit {
 
 
-  tamano : any = { col : 1};
-  tamano2 : any = { col : 1};
+  tamano: any = { col: 1 };
+  tamano2: any = { col: 1 };
   hidePassword = true;
   loginForm = new FormGroup({
-    Correo: new FormControl('', [Validators.required,]),
+    Usuario: new FormControl('', [Validators.required,]),
     Clave: new FormControl('', [Validators.required]),
   })
 
@@ -30,10 +30,10 @@ export class LoginComponent extends BaseFormComponent implements OnInit  {
     public cookieService: CookieService,
     private router: Router,
     private ls: LoginService,
-    private m :MenuService
-    ) {
-      super();
-    }
+    private m: MenuService
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.cookieService.set("token", "");
@@ -42,11 +42,11 @@ export class LoginComponent extends BaseFormComponent implements OnInit  {
       .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
-          this.tamano = { col : 0, row : 1};
-          this.tamano2 = { col : 3, row : 1};
-        }else{
-          this.tamano = { col : 1, row : 1};
-          this.tamano2 = { col : 1, row : 1};
+          this.tamano = { col: 0, row: 1 };
+          this.tamano2 = { col: 3, row: 1 };
+        } else {
+          this.tamano = { col: 1, row: 1 };
+          this.tamano2 = { col: 1, row: 1 };
         }
       });
   }
@@ -60,8 +60,8 @@ export class LoginComponent extends BaseFormComponent implements OnInit  {
         this.router.navigate(["/index"]);
       }, error => {
         this.loginForm.reset();
-        this.error(error);  
-        this.loanding = false;      
+        this.error(error);
+        this.loanding = false;
       }, () => this.loanding = false)
     }
   }
