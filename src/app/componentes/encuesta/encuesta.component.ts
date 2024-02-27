@@ -31,7 +31,7 @@ export class EncuestaComponent extends BaseFormComponent implements OnInit {
     public dialog: MatDialog
   ) {
     super();
-    this.cancelar();
+    this.preLoad();
   }
 
   tamano: any = { col: 1, row: 1 };
@@ -117,7 +117,7 @@ export class EncuestaComponent extends BaseFormComponent implements OnInit {
   }
 
   siguientePregunta() {
-    if (parseInt(this.varloRespuesta) != 5 && this.observacionRespuesta.length == 0) {
+    if (parseInt(this.varloRespuesta) != 0 && parseInt(this.varloRespuesta) != 5 && this.observacionRespuesta.length == 0) {
       this.error("Debe digitar una observacion");
     }
     else {
@@ -169,6 +169,13 @@ export class EncuestaComponent extends BaseFormComponent implements OnInit {
  * restaura el formulario a valores iniciales
  */
   cancelar() {
+    var dialog = confirm('Esta seguro de cancelar la encuesta?');
+    if (dialog) {
+      this.preLoad();
+    }
+  }
+
+  preLoad() {
     this.encuesta = { SedeId: 0, Respuestas: null };
     this.cargarMisSedes();
     this.cargarPreguntas();

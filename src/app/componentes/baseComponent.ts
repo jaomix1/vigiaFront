@@ -80,6 +80,9 @@ export class BaseFormComponent {
             case 'SI':
                 return 'yellow'
                 break;
+            case 'NA':
+                return 'yellow'
+                break;
             default:
                 return 'red'
                 break;

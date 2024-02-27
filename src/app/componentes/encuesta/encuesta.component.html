@@ -34,6 +34,7 @@
                             </mat-radio-group>
                             <mat-radio-group *ngIf="this.preguntaActiva.Tipo != 'Numerica'" class="example-radio-group"
                                 [(ngModel)]="varloRespuesta">
+                                <mat-radio-button value="0" class="example-radio-button">No Aplica</mat-radio-button>
                                 <mat-radio-button value="1" class="example-radio-button">NO</mat-radio-button>
                                 <mat-radio-button value="5" class="example-radio-button">SI</mat-radio-button>
                             </mat-radio-group>
@@ -49,8 +50,7 @@
                                     <mat-icon>fast_rewind</mat-icon>
                                 </button>
                                 <button class="col avance" mat-raised-button color="primary"
-                                    [disabled]="this.varloRespuesta == 0 || esUltimaPregunta"
-                                    (click)="siguientePregunta()">
+                                    [disabled]="esUltimaPregunta" (click)="siguientePregunta()">
                                     <mat-icon>fast_forward</mat-icon>
                                 </button>
                             </div>
